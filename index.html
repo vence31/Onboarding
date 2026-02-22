@@ -909,12 +909,19 @@ footer a { color:var(--blue); text-decoration:none; }
       <h2>Welcome to <span>StayVCS</span></h2>
       <p>Your firm is now active. Grade-A leads from your selected states will begin routing to your intake contact. Check your email for dashboard access and your first lead report.</p>
       <div class="success-ref" id="refNum">FIRM-——</div>
+      <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-family:var(--mono);font-size:11px;color:#93c5fd;line-height:1.8;text-align:left;">
+        <strong style="color:var(--text);display:block;margin-bottom:6px;">📋 YOUR NEXT STEPS:</strong>
+        1. Check your email — dashboard access link sent to <span id="successEmail">your email</span><br>
+        2. Your intake contact will receive Grade-A lead alerts by email + SMS<br>
+        3. Bookmark your dashboard URL once you receive it<br>
+        4. Questions? Email <a href="mailto:vence31@gmail.com" style="color:var(--blue)">vence31@gmail.com</a>
+      </div>
       <div class="success-next">
-        <a href="https://vence31.github.io/Disability-Leads/AttorneyDashboard_Dark.html" class="success-btn primary" target="_blank">
-          Open Your Dashboard →
+        <a href="https://vence31.github.io/Disability-Leads/" class="success-btn primary" target="_blank">
+          View Intake Platform →
         </a>
-        <a href="#" class="success-btn secondary" onclick="window.print()">
-          Print Confirmation
+        <a href="mailto:vence31@gmail.com?subject=Dashboard Access Request" class="success-btn secondary">
+          Request Dashboard Access
         </a>
       </div>
     </div>
@@ -943,12 +950,12 @@ footer a { color:var(--blue); text-decoration:none; }
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 StayVCS LLC · Legal Marketing &amp; Intake Qualification Platform · <a href="mailto:vence31@gmail.com">vence31@gmail.com</a></p>
+  <p>© 2026 StayVCS LLC · Legal Marketing &amp; Intake Qualification Platform · <a href="/cdn-cgi/l/email-protection#7006151e1315434130171d11191c5e131f1d"><span class="__cf_email__" data-cfemail="3e485b505d5b0d0f7e59535f5752105d5153">[email&#160;protected]</span></a></p>
   <p>This platform is not a law firm and does not provide legal advice.</p>
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://js.stripe.com/v3/"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script>
 // ── CONFIG — REPLACE THESE ────────────────────────────────────────────────────
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_YOUR_STRIPE_KEY_HERE'; // Get from dashboard.stripe.com
@@ -1191,13 +1198,6 @@ async function submitForm() {
   // Show success
   const refNum = 'FIRM-' + Date.now().toString(36).toUpperCase().slice(-6);
   document.getElementById('refNum').textContent = refNum;
+  document.getElementById('successEmail').textContent = payload.email || 'your email';
   document.getElementById('formBody').style.display = 'none';
-  document.getElementById('selectedPlanBar').style.display = 'none';
-  document.getElementById('successScreen').classList.add('show');
-
-  // Scroll to success
-  document.querySelector('.form-card').scrollIntoView({behavior:'smooth'});
-}
-</script>
-</body>
-</html>
+  document.getElementByI
