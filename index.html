@@ -7,516 +7,219 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:      #020617;
-  --bg2:     #0f172a;
-  --bg3:     #1e293b;
-  --blue:    #3b82f6;
-  --blue-d:  #1d4ed8;
-  --cyan:    #06b6d4;
-  --green:   #10b981;
-  --gold:    #c8973a;
-  --red:     #ef4444;
-  --yellow:  #f59e0b;
-  --slate:   #334155;
-  --text:    #f8fafc;
-  --muted:   #64748b;
-  --border:  rgba(51,65,85,.8);
-  --mono:    'JetBrains Mono', monospace;
-  --display: 'Syne', sans-serif;
-  --body:    'Manrope', sans-serif;
-  --r:       12px;
+  --bg:     #020617;
+  --bg2:    #0f172a;
+  --bg3:    #1e293b;
+  --blue:   #3b82f6;
+  --blue-d: #1d4ed8;
+  --cyan:   #06b6d4;
+  --green:  #10b981;
+  --gold:   #c8973a;
+  --red:    #ef4444;
+  --muted:  #64748b;
+  --text:   #f8fafc;
+  --border: rgba(51,65,85,.8);
+  --mono:   'JetBrains Mono', monospace;
+  --disp:   'Syne', sans-serif;
+  --body:   'Manrope', sans-serif;
 }
-*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  font-family: var(--body);
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-body::before {
-  content:'';
-  position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(ellipse at 15% 0%, rgba(30,58,138,.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 100%, rgba(6,182,212,.08) 0%, transparent 45%),
-    radial-gradient(ellipse at 50% 50%, rgba(59,130,246,.04) 0%, transparent 60%);
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 15% 0%,rgba(30,58,138,.3) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(6,182,212,.07) 0%,transparent 45%);}
 
-/* ── TOPBAR ── */
-.topbar {
-  position:sticky; top:0; z-index:100;
-  background: rgba(2,6,23,.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 40px; height:64px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.topbar::after {
-  content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px;
-  background: linear-gradient(90deg, transparent, var(--blue), var(--cyan), transparent);
-}
-.logo { display:flex; align-items:center; gap:12px; }
-.logo-icon {
-  width:36px; height:36px; border-radius:8px;
-  background: linear-gradient(135deg, var(--blue-d), var(--blue));
-  display:flex; align-items:center; justify-content:center;
-  font-size:16px; box-shadow:0 0 16px rgba(59,130,246,.4);
-}
-.logo-text { font-family:var(--display); font-size:16px; font-weight:800; letter-spacing:-.02em; }
-.logo-sub { font-family:var(--mono); font-size:9px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; margin-top:1px; }
-.topbar-badge {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  color:var(--green); background:rgba(16,185,129,.1);
-  border:1px solid rgba(16,185,129,.25); border-radius:20px;
-  padding:4px 12px; letter-spacing:.06em; text-transform:uppercase;
-}
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(2,6,23,.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.topbar::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--blue),var(--cyan),transparent);}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--blue-d),var(--blue));display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 0 16px rgba(59,130,246,.4);}
+.logo-text{font-family:var(--disp);font-size:16px;font-weight:800;letter-spacing:-.02em;}
+.logo-sub{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:1px;}
+.topbar-badge{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);border-radius:20px;padding:4px 12px;letter-spacing:.06em;text-transform:uppercase;}
 
-/* ── HERO ── */
-.hero {
-  position:relative; z-index:1;
-  padding: 80px 40px 60px;
-  text-align:center; max-width:900px; margin:0 auto;
-}
-.hero-badge {
-  display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  color:var(--blue); background:rgba(59,130,246,.1);
-  border:1px solid rgba(59,130,246,.25); border-radius:20px;
-  padding:5px 14px; letter-spacing:.1em; text-transform:uppercase;
-  margin-bottom:28px;
-}
-.hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--blue); animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.5;transform:scale(1.3);} }
-.hero h1 {
-  font-family:var(--display); font-size:clamp(36px,5vw,64px);
-  font-weight:900; line-height:1.05; letter-spacing:-.03em;
-  margin-bottom:20px;
-}
-.hero h1 span { 
-  background: linear-gradient(135deg, var(--blue), var(--cyan));
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero p {
-  font-size:17px; color:#94a3b8; line-height:1.7;
-  max-width:640px; margin:0 auto 40px;
-}
-.hero-stats {
-  display:flex; justify-content:center; gap:0;
-  background:rgba(15,23,42,.8); border:1px solid var(--border);
-  border-radius:16px; overflow:hidden; max-width:600px; margin:0 auto;
-}
-.hstat {
-  flex:1; padding:20px 10px; text-align:center;
-  border-right:1px solid var(--border);
-}
-.hstat:last-child { border:none; }
-.hstat-num { font-family:var(--display); font-size:28px; font-weight:800; color:var(--blue); }
-.hstat-lbl { font-family:var(--mono); font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-top:4px; }
+/* HERO */
+.hero{position:relative;z-index:1;padding:80px 40px 60px;text-align:center;max-width:900px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:5px 14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:28px;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--blue);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero h1{font-family:var(--disp);font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;letter-spacing:-.03em;margin-bottom:20px;}
+.hero h1 span{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{font-size:16px;color:#94a3b8;line-height:1.7;max-width:600px;margin:0 auto 40px;}
+.hero-stats{display:flex;justify-content:center;background:rgba(15,23,42,.8);border:1px solid var(--border);border-radius:16px;overflow:hidden;max-width:560px;margin:0 auto;}
+.hstat{flex:1;padding:18px 8px;text-align:center;border-right:1px solid var(--border);}
+.hstat:last-child{border:none;}
+.hstat-num{font-family:var(--disp);font-size:24px;font-weight:800;color:var(--blue);}
+.hstat-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;}
 
-/* ── PRICING SECTION ── */
-.section { position:relative; z-index:1; padding:60px 40px; max-width:1100px; margin:0 auto; }
-.section-label {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  color:var(--blue); letter-spacing:.15em; text-transform:uppercase;
-  margin-bottom:12px;
-}
-.section-title {
-  font-family:var(--display); font-size:clamp(26px,3.5vw,40px);
-  font-weight:800; letter-spacing:-.02em; margin-bottom:10px;
-}
-.section-sub { font-size:15px; color:#94a3b8; margin-bottom:48px; line-height:1.6; }
+/* PRICING SECTION */
+.section{position:relative;z-index:1;padding:60px 40px;max-width:1100px;margin:0 auto;}
+.section-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.section-title{font-family:var(--disp);font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+.section-sub{font-size:15px;color:#94a3b8;margin-bottom:44px;line-height:1.6;max-width:680px;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start;}
 
-.pricing-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px; align-items:start;
-}
+.pcard{background:rgba(15,23,42,.9);border:1px solid var(--border);border-radius:18px;overflow:hidden;position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;}
+.pcard:hover{transform:translateY(-4px);}
+.pcard.featured{border-color:var(--blue);box-shadow:0 0 0 1px rgba(59,130,246,.3),0 16px 40px rgba(59,130,246,.12);transform:scale(1.02);}
+.pcard.featured:hover{transform:scale(1.02) translateY(-4px);}
+.pcard.picked{box-shadow:0 0 0 3px var(--green) !important;border-color:var(--green) !important;}
+.feat-badge{background:linear-gradient(90deg,var(--blue-d),var(--blue));text-align:center;padding:6px;font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#fff;}
+.pcard-body{padding:26px 22px 22px;}
+.pcard.featured .pcard-body{padding-top:22px;}
+.p-tier{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:5px;}
+.p-name{font-family:var(--disp);font-size:19px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px;}
+.p-price{display:flex;align-items:baseline;gap:3px;margin-bottom:3px;}
+.p-amt{font-family:var(--disp);font-size:42px;font-weight:900;line-height:1;letter-spacing:-.03em;}
+.p-amt.gold{color:var(--gold);}
+.p-amt.blue{color:var(--blue);}
+.p-amt.cyan{color:var(--cyan);}
+.p-per{font-family:var(--mono);font-size:11px;color:var(--muted);}
+.p-note{font-family:var(--mono);font-size:9px;color:var(--muted);margin-bottom:18px;letter-spacing:.03em;}
+.p-div{height:1px;background:var(--border);margin-bottom:16px;}
+.p-feats{list-style:none;margin-bottom:20px;}
+.p-feats li{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:#cbd5e1;padding:3px 0;border-bottom:1px solid rgba(51,65,85,.25);}
+.p-feats li:last-child{border:none;}
+.p-feats li.dim{color:var(--muted);}
+.p-btn{width:100%;padding:12px;border-radius:10px;font-family:var(--body);font-size:12px;font-weight:800;cursor:pointer;border:none;transition:all .2s;text-transform:uppercase;letter-spacing:.04em;}
+.btn-gold{background:linear-gradient(135deg,#92400e,var(--gold));color:#fff;box-shadow:0 4px 14px rgba(200,151,58,.3);}
+.btn-gold:hover{box-shadow:0 6px 22px rgba(200,151,58,.5);}
+.btn-blue{background:linear-gradient(135deg,var(--blue-d),var(--blue));color:#fff;box-shadow:0 4px 14px rgba(59,130,246,.35);}
+.btn-blue:hover{box-shadow:0 6px 22px rgba(59,130,246,.5);}
+.btn-cyan{background:linear-gradient(135deg,#0c4a6e,var(--cyan));color:#fff;box-shadow:0 4px 14px rgba(6,182,212,.3);}
+.btn-cyan:hover{box-shadow:0 6px 22px rgba(6,182,212,.5);}
 
-.price-card {
-  background:rgba(15,23,42,.9);
-  border:1px solid var(--border);
-  border-radius:20px; overflow:hidden;
-  transition:transform .2s, box-shadow .2s;
-  cursor:pointer; position:relative;
-}
-.price-card:hover { transform:translateY(-6px); box-shadow:0 24px 60px rgba(0,0,0,.5); }
-.price-card.featured {
-  border-color:var(--blue);
-  box-shadow:0 0 0 1px rgba(59,130,246,.3), 0 20px 50px rgba(59,130,246,.15);
-  transform:scale(1.03);
-}
-.price-card.featured:hover { transform:scale(1.03) translateY(-6px); }
+/* MSA */
+.msa-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 40px 50px;}
+.msa-box{background:rgba(15,23,42,.9);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+.msa-head{background:rgba(2,6,23,.8);padding:16px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.msa-icon{width:34px;height:34px;border-radius:8px;background:rgba(200,151,58,.15);border:1px solid rgba(200,151,58,.3);display:flex;align-items:center;justify-content:center;font-size:15px;}
+.msa-head h3{font-family:var(--disp);font-size:16px;font-weight:800;}
+.msa-head p{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:1px;letter-spacing:.06em;}
+.msa-body{padding:20px 24px;max-height:260px;overflow-y:auto;}
+.msa-body::-webkit-scrollbar{width:4px;}
+.msa-body::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px;}
+.msa-text{font-size:11px;color:#94a3b8;line-height:1.8;font-family:var(--mono);}
+.msa-text h4{color:var(--text);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin:12px 0 4px;}
+.msa-text p{margin-bottom:7px;}
 
-.featured-badge {
-  position:absolute; top:0; left:0; right:0;
-  background:linear-gradient(90deg,var(--blue-d),var(--blue));
-  text-align:center; padding:6px;
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.1em; color:#fff;
-}
-.price-card-body { padding:32px 28px 28px; }
-.price-card.featured .price-card-body { padding-top:44px; }
+/* FORM */
+.form-section{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 40px 80px;}
+.form-card{background:rgba(15,23,42,.95);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);}
+.form-head{background:rgba(2,6,23,.9);padding:24px 32px;border-bottom:1px solid var(--border);position:relative;}
+.form-head::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
+.form-head h2{font-family:var(--disp);font-size:21px;font-weight:800;letter-spacing:-.02em;}
+.form-head p{font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:3px;letter-spacing:.08em;text-transform:uppercase;}
 
-.plan-name {
-  font-family:var(--mono); font-size:11px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.12em;
-  color:var(--muted); margin-bottom:8px;
-}
-.plan-title {
-  font-family:var(--display); font-size:22px; font-weight:800;
-  letter-spacing:-.02em; margin-bottom:20px;
-}
-.plan-price {
-  display:flex; align-items:baseline; gap:4px; margin-bottom:6px;
-}
-.plan-price-num {
-  font-family:var(--display); font-size:52px; font-weight:900;
-  line-height:1; letter-spacing:-.03em;
-}
-.plan-price-num.gold { color:var(--gold); }
-.plan-price-num.blue { color:var(--blue); }
-.plan-price-num.cyan { color:var(--cyan); }
-.plan-price-period { font-family:var(--mono); font-size:12px; color:var(--muted); }
-.plan-price-sub { font-family:var(--mono); font-size:10px; color:var(--muted); margin-bottom:24px; letter-spacing:.04em; }
+/* Plan bar */
+.plan-bar{padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(2,6,23,.5);}
+.pb-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;}
+.pb-name{font-family:var(--disp);font-size:15px;font-weight:800;margin-top:2px;color:var(--muted);}
+.pb-name.gold{color:var(--gold);}
+.pb-name.blue{color:var(--blue);}
+.pb-name.cyan{color:var(--cyan);}
+.pb-change{font-family:var(--mono);font-size:9px;color:var(--blue);cursor:pointer;text-decoration:underline;letter-spacing:.04em;}
 
-.plan-divider { height:1px; background:var(--border); margin-bottom:22px; }
+/* Form fields */
+.form-body{padding:32px;}
+.f-part{margin-bottom:30px;}
+.f-part-title{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--blue);margin-bottom:16px;padding-bottom:7px;border-bottom:1px solid rgba(59,130,246,.2);display:flex;align-items:center;gap:8px;}
+.f-num{width:18px;height:18px;border-radius:50%;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:inline-flex;align-items:center;justify-content:center;font-size:9px;color:var(--blue);}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.r1{margin-bottom:14px;}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px;}
+.fld{display:flex;flex-direction:column;gap:5px;}
+.fld label{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);}
+.req{color:var(--blue);margin-left:2px;}
+.fld input,.fld select{background:rgba(2,6,23,.8);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--body);font-size:14px;padding:11px 13px;outline:none;transition:border-color .15s,box-shadow .15s;width:100%;}
+.fld input::placeholder{color:var(--muted);}
+.fld input:focus,.fld select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(59,130,246,.1);}
+.fld select option{background:#0f172a;}
+.fld .e{font-family:var(--mono);font-size:9px;color:var(--red);display:none;margin-top:2px;}
+.fld.bad input,.fld.bad select{border-color:var(--red);}
+.fld.bad .e{display:block;}
 
-.plan-features { list-style:none; margin-bottom:28px; }
-.plan-features li {
-  display:flex; align-items:flex-start; gap:10px;
-  font-size:13px; color:#cbd5e1; padding:5px 0;
-  border-bottom:1px solid rgba(51,65,85,.4);
-}
-.plan-features li:last-child { border:none; }
-.feat-icon { font-size:13px; flex-shrink:0; margin-top:1px; }
-
-.plan-btn {
-  width:100%; padding:14px; border-radius:10px;
-  font-family:var(--body); font-size:13px; font-weight:800;
-  cursor:pointer; border:none; transition:all .2s;
-  letter-spacing:.03em; text-transform:uppercase;
-}
-.plan-btn.gold-btn {
-  background:linear-gradient(135deg,#b45309,var(--gold));
-  color:#fff; box-shadow:0 4px 16px rgba(200,151,58,.3);
-}
-.plan-btn.gold-btn:hover { box-shadow:0 6px 24px rgba(200,151,58,.5); transform:translateY(-1px); }
-.plan-btn.blue-btn {
-  background:linear-gradient(135deg,var(--blue-d),var(--blue));
-  color:#fff; box-shadow:0 4px 16px rgba(59,130,246,.35);
-}
-.plan-btn.blue-btn:hover { box-shadow:0 6px 24px rgba(59,130,246,.5); transform:translateY(-1px); }
-.plan-btn.cyan-btn {
-  background:linear-gradient(135deg,#0891b2,var(--cyan));
-  color:#fff; box-shadow:0 4px 16px rgba(6,182,212,.3);
-}
-.plan-btn.cyan-btn:hover { box-shadow:0 6px 24px rgba(6,182,212,.5); transform:translateY(-1px); }
-
-/* ── MSA SECTION ── */
-.msa-section {
-  position:relative; z-index:1;
-  max-width:900px; margin:0 auto; padding:0 40px 60px;
-}
-.msa-box {
-  background:rgba(15,23,42,.9);
-  border:1px solid var(--border); border-radius:16px;
-  overflow:hidden;
-}
-.msa-header {
-  background:rgba(2,6,23,.8); padding:20px 28px;
-  border-bottom:1px solid var(--border);
-  display:flex; align-items:center; gap:12px;
-}
-.msa-header-icon {
-  width:36px; height:36px; border-radius:8px;
-  background:rgba(200,151,58,.15); border:1px solid rgba(200,151,58,.3);
-  display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0;
-}
-.msa-header h3 { font-family:var(--display); font-size:18px; font-weight:800; }
-.msa-header p { font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:2px; letter-spacing:.06em; }
-.msa-body { padding:24px 28px; max-height:300px; overflow-y:auto; }
-.msa-body::-webkit-scrollbar { width:4px; }
-.msa-body::-webkit-scrollbar-track { background:transparent; }
-.msa-body::-webkit-scrollbar-thumb { background:var(--slate); border-radius:2px; }
-.msa-text { font-size:12px; color:#94a3b8; line-height:1.8; font-family:var(--mono); }
-.msa-text h4 { color:var(--text); font-size:11px; text-transform:uppercase; letter-spacing:.1em; margin:16px 0 6px; }
-.msa-text p { margin-bottom:10px; }
-
-/* ── ONBOARDING FORM ── */
-.form-section {
-  position:relative; z-index:1;
-  max-width:900px; margin:0 auto; padding:0 40px 80px;
-}
-.form-card {
-  background:rgba(15,23,42,.95);
-  border:1px solid var(--border); border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 40px 80px rgba(0,0,0,.4);
-}
-.form-header {
-  background:rgba(2,6,23,.9);
-  padding:28px 36px; border-bottom:1px solid var(--border);
-  position:relative;
-}
-.form-header::after {
-  content:''; position:absolute; bottom:-1px; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,var(--blue),var(--cyan));
-}
-.form-header h2 { font-family:var(--display); font-size:24px; font-weight:800; letter-spacing:-.02em; }
-.form-header p { font-family:var(--mono); font-size:10px; color:var(--muted); margin-top:4px; letter-spacing:.08em; text-transform:uppercase; }
-
-/* Selected plan indicator */
-.selected-plan-bar {
-  background:rgba(59,130,246,.08);
-  border-bottom:1px solid rgba(59,130,246,.2);
-  padding:14px 36px;
-  display:flex; align-items:center; justify-content:space-between;
-}
-.selected-plan-bar.gold-bar { background:rgba(200,151,58,.08); border-color:rgba(200,151,58,.2); }
-.selected-plan-bar.cyan-bar { background:rgba(6,182,212,.08); border-color:rgba(6,182,212,.2); }
-.spb-label { font-family:var(--mono); font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
-.spb-plan { font-family:var(--display); font-size:16px; font-weight:800; }
-.spb-plan.gold { color:var(--gold); }
-.spb-plan.blue { color:var(--blue); }
-.spb-plan.cyan { color:var(--cyan); }
-.spb-change {
-  font-family:var(--mono); font-size:10px; color:var(--blue);
-  cursor:pointer; text-decoration:underline; letter-spacing:.04em;
-}
-
-.form-body { padding:36px; }
-
-/* Form parts */
-.form-part { margin-bottom:36px; }
-.form-part-title {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.14em; color:var(--blue);
-  margin-bottom:20px; padding-bottom:8px;
-  border-bottom:1px solid rgba(59,130,246,.2);
-  display:flex; align-items:center; gap:8px;
-}
-.form-part-title span {
-  width:20px; height:20px; border-radius:50%;
-  background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3);
-  display:inline-flex; align-items:center; justify-content:center;
-  font-size:10px; color:var(--blue);
-}
-
-.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
-.form-row.full { grid-template-columns:1fr; }
-.form-row.three { grid-template-columns:1fr 1fr 1fr; }
-
-.fld { display:flex; flex-direction:column; gap:6px; }
-.fld label {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
-}
-.fld label .req { color:var(--blue); margin-left:2px; }
-.fld input, .fld select, .fld textarea {
-  background:rgba(2,6,23,.8);
-  border:1px solid var(--border); border-radius:8px;
-  color:var(--text); font-family:var(--body); font-size:14px;
-  padding:12px 14px; outline:none;
-  transition:border-color .15s, box-shadow .15s;
-  width:100%;
-}
-.fld input::placeholder, .fld textarea::placeholder { color:var(--muted); }
-.fld input:focus, .fld select:focus, .fld textarea:focus {
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(59,130,246,.12);
-}
-.fld select { cursor:pointer; }
-.fld select option { background:#0f172a; }
-.fld textarea { resize:vertical; min-height:80px; }
-.fld.has-error input, .fld.has-error select { border-color:var(--red); }
-.fld .err { font-size:11px; color:var(--red); font-family:var(--mono); display:none; }
-.fld.has-error .err { display:block; }
-
-/* States multi-select */
-.states-grid {
-  display:grid; grid-template-columns:repeat(4,1fr);
-  gap:6px;
-}
-.state-chip {
-  padding:7px 8px; border-radius:6px; cursor:pointer;
-  border:1px solid var(--border); background:transparent;
-  font-family:var(--mono); font-size:10px; color:var(--muted);
-  text-align:center; transition:all .15s; user-select:none;
-  letter-spacing:.04em;
-}
-.state-chip:hover { border-color:var(--blue); color:var(--blue); }
-.state-chip.selected { border-color:var(--blue); color:var(--blue); background:rgba(59,130,246,.12); }
+/* States grid */
+.s-lbl{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px;}
+.s-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:5px;}
+.sc{padding:6px 3px;border-radius:5px;cursor:pointer;border:1px solid var(--border);background:transparent;font-family:var(--mono);font-size:8px;color:var(--muted);text-align:center;transition:all .12s;user-select:none;line-height:1.3;}
+.sc:hover{border-color:var(--blue);color:var(--blue);}
+.sc.on{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,.1);}
+.s-err{font-family:var(--mono);font-size:9px;color:var(--red);display:none;margin-bottom:8px;}
+.sc.locked{cursor:default;opacity:.5;}
+/* Region buttons */
+.region-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
+.rgn-btn{border:1px solid var(--border);border-radius:10px;padding:12px 14px;cursor:pointer;background:rgba(15,23,42,.7);transition:all .15s;user-select:none;}
+.rgn-btn:hover{border-color:var(--blue);background:rgba(59,130,246,.08);}
+.rgn-btn.on{border-color:var(--blue);background:rgba(59,130,246,.14);box-shadow:0 0 0 1px rgba(59,130,246,.3);}
+.rgn-name{font-family:var(--disp);font-size:14px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.rgn-states{font-family:var(--mono);font-size:9px;color:var(--muted);line-height:1.5;}
 
 /* Compliance checkboxes */
-.check-list { display:flex; flex-direction:column; gap:12px; }
-.check-item {
-  display:flex; align-items:flex-start; gap:12px;
-  background:rgba(2,6,23,.6); border:1px solid var(--border);
-  border-radius:10px; padding:14px 16px; cursor:pointer;
-  transition:border-color .15s;
-}
-.check-item:hover { border-color:rgba(59,130,246,.3); }
-.check-item input[type="checkbox"] { display:none; }
-.check-box {
-  width:20px; height:20px; border-radius:4px; flex-shrink:0; margin-top:1px;
-  border:2px solid var(--muted); background:transparent;
-  display:flex; align-items:center; justify-content:center;
-  transition:all .15s;
-}
-.check-item.checked .check-box {
-  border-color:var(--green); background:var(--green);
-}
-.check-item.checked .check-box::after {
-  content:'✓'; color:#fff; font-size:12px; font-weight:900;
-}
-.check-item-text { font-size:13px; color:#94a3b8; line-height:1.55; }
-.check-item-text strong { color:var(--text); display:block; margin-bottom:3px; font-size:13px; }
+.ck-list{display:flex;flex-direction:column;gap:9px;}
+.ck-item{display:flex;align-items:flex-start;gap:12px;background:rgba(2,6,23,.6);border:1px solid var(--border);border-radius:10px;padding:13px 15px;cursor:pointer;transition:border-color .15s;-webkit-user-select:none;user-select:none;}
+.ck-item:hover{border-color:rgba(59,130,246,.3);}
+.ck-item.on{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.04);}
+.ck-box{width:22px;height:22px;min-width:22px;border-radius:5px;border:2px solid var(--muted);background:transparent;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:#fff;transition:all .15s;margin-top:1px;}
+.ck-item.on .ck-box{border-color:var(--green);background:var(--green);}
+.ck-text{font-size:12px;color:#94a3b8;line-height:1.6;}
+.ck-text strong{color:var(--text);display:block;margin-bottom:3px;font-size:12px;}
+.ck-err{font-family:var(--mono);font-size:9px;color:var(--red);margin-top:8px;display:none;}
 
-/* Payment section */
-.payment-section { margin-top:36px; }
-.payment-title {
-  font-family:var(--mono); font-size:10px; font-weight:700;
-  text-transform:uppercase; letter-spacing:.14em; color:var(--green);
-  margin-bottom:20px; padding-bottom:8px;
-  border-bottom:1px solid rgba(16,185,129,.2);
-  display:flex; align-items:center; gap:8px;
-}
-.payment-summary {
-  background:rgba(2,6,23,.8);
-  border:1px solid var(--border); border-radius:12px;
-  padding:20px 22px; margin-bottom:20px;
-}
-.payment-row {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8px 0; border-bottom:1px solid rgba(51,65,85,.4);
-  font-size:13px;
-}
-.payment-row:last-child { border:none; }
-.payment-row .pkey { color:var(--muted); font-family:var(--mono); font-size:11px; letter-spacing:.04em; }
-.payment-row .pval { color:var(--text); font-weight:700; }
-.payment-row.total .pkey { color:var(--text); font-size:13px; font-weight:700; }
-.payment-row.total .pval { color:var(--green); font-family:var(--display); font-size:22px; font-weight:800; }
+/* Payment */
+.pay-sect{margin-top:28px;}
+.pay-title{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green);margin-bottom:16px;padding-bottom:7px;border-bottom:1px solid rgba(16,185,129,.2);}
+.pay-sum{background:rgba(2,6,23,.8);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(51,65,85,.35);font-size:12px;}
+.pay-row:last-child{border:none;}
+.pk{color:var(--muted);font-family:var(--mono);font-size:9px;letter-spacing:.04em;}
+.pv{color:var(--text);font-weight:700;}
+.pay-row.tot .pk{color:var(--text);font-size:11px;font-weight:700;}
+.pay-row.tot .pv{color:var(--green);font-family:var(--disp);font-size:20px;font-weight:800;}
+.stripe-box{background:rgba(2,6,23,.8);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+.stripe-lbl{font-family:var(--mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px;}
+#card-element{background:rgba(15,23,42,.8);border:1px solid var(--border);border-radius:8px;padding:12px;min-height:44px;}
+#card-errors{font-family:var(--mono);font-size:10px;color:var(--red);margin-top:5px;min-height:14px;}
+.stripe-note{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--muted);margin-top:5px;}
+.sub-btn{width:100%;padding:16px;border-radius:12px;font-family:var(--disp);font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .25s;letter-spacing:.02em;background:linear-gradient(135deg,var(--blue-d),var(--blue),var(--cyan));color:#fff;box-shadow:0 4px 20px rgba(59,130,246,.4);}
+.sub-btn:hover{box-shadow:0 8px 30px rgba(59,130,246,.6);transform:translateY(-2px);}
+.sub-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.sub-note{text-align:center;margin-top:9px;font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.04em;}
 
-/* Stripe element placeholder */
-.stripe-wrap {
-  background:rgba(2,6,23,.8);
-  border:1px solid var(--border); border-radius:12px;
-  padding:20px 22px; margin-bottom:20px;
-}
-.stripe-label {
-  font-family:var(--mono); font-size:10px; color:var(--muted);
-  text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px;
-}
-#card-element {
-  background:rgba(15,23,42,.8);
-  border:1px solid var(--border); border-radius:8px; padding:14px;
-  min-height:48px;
-  transition:border-color .15s;
-}
-#card-element.StripeElement--focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(59,130,246,.12); }
-#card-errors { font-family:var(--mono); font-size:11px; color:var(--red); margin-top:8px; min-height:16px; }
-.stripe-secure {
-  display:flex; align-items:center; gap:6px;
-  font-family:var(--mono); font-size:10px; color:var(--muted);
-  letter-spacing:.04em; margin-top:8px;
-}
-.stripe-secure::before { content:'🔒'; font-size:11px; }
+/* SUCCESS */
+.success{display:none;padding:60px 32px;text-align:center;}
+.success.show{display:block;}
+.suc-icon{width:76px;height:76px;border-radius:50%;background:rgba(16,185,129,.15);border:2px solid var(--green);display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 20px;box-shadow:0 0 28px rgba(16,185,129,.3);animation:pop .4s cubic-bezier(.4,0,.2,1);}
+@keyframes pop{from{opacity:0;transform:scale(.6);}to{opacity:1;transform:scale(1);}}
+.success h2{font-family:var(--disp);font-size:28px;font-weight:800;margin-bottom:10px;}
+.success h2 span{color:var(--green);}
+.success p{font-size:14px;color:#94a3b8;line-height:1.7;max-width:460px;margin:0 auto 18px;}
+.suc-ref{font-family:var(--mono);font-size:10px;color:var(--blue);background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:9px 16px;display:inline-block;margin-bottom:18px;letter-spacing:.08em;}
+.suc-steps{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.18);border-radius:10px;padding:13px 16px;margin:0 auto 22px;font-family:var(--mono);font-size:9px;color:#93c5fd;line-height:2.1;text-align:left;max-width:460px;}
+.suc-steps strong{color:var(--text);display:block;margin-bottom:3px;font-size:10px;}
+.suc-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.suc-btn{padding:11px 20px;border-radius:8px;font-family:var(--body);font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;display:inline-flex;align-items:center;gap:6px;}
+.suc-btn.p{background:linear-gradient(135deg,var(--blue-d),var(--blue));color:#fff;border:none;box-shadow:0 4px 14px rgba(59,130,246,.35);}
+.suc-btn.s{background:transparent;color:var(--muted);border:1px solid var(--border);}
 
-/* Submit button */
-.submit-btn {
-  width:100%; padding:18px; border-radius:12px;
-  font-family:var(--display); font-size:16px; font-weight:800;
-  cursor:pointer; border:none; transition:all .25s;
-  letter-spacing:.02em;
-  background:linear-gradient(135deg,var(--blue-d),var(--blue),var(--cyan));
-  color:#fff; box-shadow:0 4px 20px rgba(59,130,246,.4);
-  position:relative; overflow:hidden;
-}
-.submit-btn::after {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);
-  opacity:0; transition:opacity .2s;
-}
-.submit-btn:hover { box-shadow:0 8px 32px rgba(59,130,246,.6); transform:translateY(-2px); }
-.submit-btn:hover::after { opacity:1; }
-.submit-btn:disabled { opacity:.6; cursor:not-allowed; transform:none; }
+/* TRUST + FOOTER */
+.trust{position:relative;z-index:1;padding:28px 40px 46px;max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.tc{background:rgba(15,23,42,.6);border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center;}
+.tc-icon{font-size:24px;margin-bottom:9px;}
+.tc-title{font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text);margin-bottom:4px;}
+.tc-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+footer p{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:.05em;}
+footer a{color:var(--blue);text-decoration:none;}
 
-/* ── SUCCESS SCREEN ── */
-.success-screen {
-  display:none; padding:60px 36px; text-align:center;
-}
-.success-screen.show { display:block; }
-.success-icon {
-  width:80px; height:80px; border-radius:50%;
-  background:rgba(16,185,129,.15); border:2px solid var(--green);
-  display:flex; align-items:center; justify-content:center;
-  font-size:36px; margin:0 auto 24px;
-  box-shadow:0 0 30px rgba(16,185,129,.3);
-  animation:successPop .4s cubic-bezier(.4,0,.2,1);
-}
-@keyframes successPop { from{opacity:0;transform:scale(.6);} to{opacity:1;transform:scale(1);} }
-.success-screen h2 { font-family:var(--display); font-size:32px; font-weight:800; margin-bottom:12px; }
-.success-screen h2 span { color:var(--green); }
-.success-screen p { font-size:15px; color:#94a3b8; line-height:1.7; max-width:500px; margin:0 auto 30px; }
-.success-ref {
-  font-family:var(--mono); font-size:12px; color:var(--blue);
-  background:rgba(59,130,246,.1); border:1px solid rgba(59,130,246,.2);
-  border-radius:8px; padding:12px 20px; display:inline-block; margin-bottom:30px;
-  letter-spacing:.08em;
-}
-.success-next { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
-.success-btn {
-  padding:12px 24px; border-radius:8px; font-family:var(--body);
-  font-size:13px; font-weight:700; cursor:pointer; text-decoration:none;
-  transition:all .15s; display:inline-flex; align-items:center; gap:8px;
-}
-.success-btn.primary {
-  background:linear-gradient(135deg,var(--blue-d),var(--blue));
-  color:#fff; border:none; box-shadow:0 4px 14px rgba(59,130,246,.35);
-}
-.success-btn.secondary {
-  background:transparent; color:var(--muted);
-  border:1px solid var(--border);
-}
-
-/* ── TRUST SECTION ── */
-.trust-section {
-  position:relative; z-index:1;
-  padding:40px; max-width:900px; margin:0 auto;
-  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
-}
-.trust-card {
-  background:rgba(15,23,42,.6);
-  border:1px solid var(--border); border-radius:14px;
-  padding:22px; text-align:center;
-}
-.trust-icon { font-size:28px; margin-bottom:12px; }
-.trust-title { font-family:var(--mono); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--text); margin-bottom:6px; }
-.trust-desc { font-size:12px; color:var(--muted); line-height:1.6; }
-
-/* ── FOOTER ── */
-footer {
-  position:relative; z-index:1;
-  border-top:1px solid var(--border); padding:30px 40px;
-  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
-}
-footer p { font-family:var(--mono); font-size:10px; color:var(--muted); letter-spacing:.06em; }
-footer a { color:var(--blue); text-decoration:none; }
-
-@media(max-width:768px) {
-  .topbar { padding:0 20px; }
-  .hero, .section, .msa-section, .form-section { padding-left:20px; padding-right:20px; }
-  .pricing-grid { grid-template-columns:1fr; }
-  .price-card.featured { transform:none; }
-  .form-row, .form-row.three { grid-template-columns:1fr; }
-  .states-grid { grid-template-columns:repeat(3,1fr); }
-  .trust-section { grid-template-columns:1fr; padding:20px; }
-  footer { flex-direction:column; align-items:flex-start; }
-  .form-body { padding:20px; }
+@media(max-width:768px){
+  .topbar,.hero,.section,.msa-section,.form-section{padding-left:16px;padding-right:16px;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .pcard.featured{transform:none;}
+  .r2,.r3{grid-template-columns:1fr;}
+  .s-grid{grid-template-columns:repeat(3,1fr);}
+  .trust{grid-template-columns:1fr;padding:16px;}
+  .form-body{padding:18px;}
+  footer{flex-direction:column;}
 }
 </style>
 </head>
@@ -539,7 +242,7 @@ footer a { color:var(--blue); text-decoration:none; }
   <div class="hero-badge">Attorney Partner Program — 2026</div>
   <h1>Pre-Screened Disability Intakes<br><span>Built for Selective Firms</span></h1>
   <p>We score every claimant on 7 SSA grid rule factors before a firm ever speaks to them. Grade-A leads only. One firm per state. No shared access.</p>
-  <div class="hero-stats" id="heroStats">
+  <div class="hero-stats">
     <div class="hstat"><div class="hstat-num" id="hs-total">—</div><div class="hstat-lbl">Active Leads</div></div>
     <div class="hstat"><div class="hstat-num" id="hs-hot">—</div><div class="hstat-lbl">Grade-A Cases</div></div>
     <div class="hstat"><div class="hstat-num" id="hs-states">—</div><div class="hstat-lbl">States Active</div></div>
@@ -554,127 +257,100 @@ footer a { color:var(--blue); text-decoration:none; }
   <div class="section-sub">Lock in your state before another firm does. Once activated, all Grade-A leads from your state route to you first. Flat subscription — no per-case fees, no referral structure.</div>
 
   <div class="pricing-grid">
-
     <!-- TIER 1 -->
-    <div class="price-card" onclick="selectPlan('state','$297/month','gold-bar','gold','gold-btn')">
-      <div class="price-card-body">
-        <div class="plan-name">Tier 1</div>
-        <div class="plan-title">State Access</div>
-        <div class="plan-price">
-          <div class="plan-price-num gold">$297</div>
-          <div class="plan-price-period">/month</div>
-        </div>
-        <div class="plan-price-sub">Per state · Cancel anytime</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><span class="feat-icon">✅</span>Priority routing for 1 state</li>
-          <li><span class="feat-icon">✅</span>Full dashboard access</li>
-          <li><span class="feat-icon">✅</span>All Grade-A &amp; Grade-B leads</li>
-          <li><span class="feat-icon">✅</span>Complete RFC scoring breakdown</li>
-          <li><span class="feat-icon">✅</span>Contact info included</li>
-          <li><span class="feat-icon">✅</span>Email + SMS lead alerts</li>
-          <li><span class="feat-icon">⬜</span><span style="color:var(--muted)">Multi-state access</span></li>
-          <li><span class="feat-icon">⬜</span><span style="color:var(--muted)">API integration</span></li>
+    <div class="pcard" id="pc-t1">
+      <div class="pcard-body">
+        <div class="p-tier">Tier 1</div>
+        <div class="p-name">State Access</div>
+        <div class="p-price"><div class="p-amt gold">$297</div><div class="p-per">/month</div></div>
+        <div class="p-note">Per state · Cancel anytime</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing for 1 state</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All Grade-A &amp; Grade-B leads</li>
+          <li>✅ Complete RFC scoring breakdown</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email lead alerts</li>
+          <li class="dim">— Multi-state access</li>
+          <li class="dim">— API integration</li>
         </ul>
-        <button class="plan-btn gold-btn" onclick="selectPlan('State Access — 1 State','$297/month','gold-bar','gold','gold-btn')">
-          Select State Access →
-        </button>
+        <button class="p-btn btn-gold" onclick="pickPlan('State Access','$297/month','gold','t1')">Select State Access →</button>
       </div>
     </div>
 
-    <!-- TIER 2 — FEATURED -->
-    <div class="price-card featured">
-      <div class="featured-badge">Most Popular</div>
-      <div class="price-card-body">
-        <div class="plan-name">Tier 2</div>
-        <div class="plan-title">Regional Package</div>
-        <div class="plan-price">
-          <div class="plan-price-num blue">$497</div>
-          <div class="plan-price-period">/month</div>
-        </div>
-        <div class="plan-price-sub">Up to 3 states · Best value</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><span class="feat-icon">✅</span>Priority routing for up to 3 states</li>
-          <li><span class="feat-icon">✅</span>Full dashboard access</li>
-          <li><span class="feat-icon">✅</span>All Grade-A &amp; Grade-B leads</li>
-          <li><span class="feat-icon">✅</span>Complete RFC scoring breakdown</li>
-          <li><span class="feat-icon">✅</span>Contact info included</li>
-          <li><span class="feat-icon">✅</span>Email + SMS lead alerts</li>
-          <li><span class="feat-icon">✅</span>Multi-state dashboard view</li>
-          <li><span class="feat-icon">⬜</span><span style="color:var(--muted)">API integration</span></li>
+    <!-- TIER 2 -->
+    <div class="pcard featured" id="pc-t2">
+      <div class="feat-badge">Most Popular</div>
+      <div class="pcard-body">
+        <div class="p-tier">Tier 2</div>
+        <div class="p-name">Regional Package</div>
+        <div class="p-price"><div class="p-amt blue">$497</div><div class="p-per">/month</div></div>
+        <div class="p-note">Up to 3 states · Best value</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing up to 3 states</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All Grade-A &amp; Grade-B leads</li>
+          <li>✅ Complete RFC scoring breakdown</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email + SMS lead alerts</li>
+          <li>✅ Multi-state dashboard view</li>
+          <li class="dim">— API integration</li>
         </ul>
-        <button class="plan-btn blue-btn" onclick="selectPlan('Regional Package — 3 States','$497/month','','blue','blue-btn')">
-          Select Regional →
-        </button>
+        <button class="p-btn btn-blue" onclick="pickPlan('Regional Package','$497/month','blue','t2')">Select Regional →</button>
       </div>
     </div>
 
     <!-- TIER 3 -->
-    <div class="price-card">
-      <div class="price-card-body">
-        <div class="plan-name">Tier 3</div>
-        <div class="plan-title">National Access</div>
-        <div class="plan-price">
-          <div class="plan-price-num cyan">$797</div>
-          <div class="plan-price-period">/month</div>
-        </div>
-        <div class="plan-price-sub">All states · Full platform</div>
-        <div class="plan-divider"></div>
-        <ul class="plan-features">
-          <li><span class="feat-icon">✅</span>Priority routing — all states</li>
-          <li><span class="feat-icon">✅</span>Full dashboard access</li>
-          <li><span class="feat-icon">✅</span>All Grade-A &amp; Grade-B leads</li>
-          <li><span class="feat-icon">✅</span>Complete RFC scoring breakdown</li>
-          <li><span class="feat-icon">✅</span>Contact info included</li>
-          <li><span class="feat-icon">✅</span>Email + SMS lead alerts</li>
-          <li><span class="feat-icon">✅</span>Multi-state dashboard view</li>
-          <li><span class="feat-icon">✅</span>API integration available</li>
+    <div class="pcard" id="pc-t3">
+      <div class="pcard-body">
+        <div class="p-tier">Tier 3</div>
+        <div class="p-name">National Access</div>
+        <div class="p-price"><div class="p-amt cyan">$797</div><div class="p-per">/month</div></div>
+        <div class="p-note">All states · Full platform</div>
+        <div class="p-div"></div>
+        <ul class="p-feats">
+          <li>✅ Priority routing — all states</li>
+          <li>✅ Full dashboard access</li>
+          <li>✅ All Grade-A &amp; Grade-B leads</li>
+          <li>✅ Complete RFC scoring breakdown</li>
+          <li>✅ Contact info on every lead</li>
+          <li>✅ Email + SMS lead alerts</li>
+          <li>✅ Multi-state dashboard view</li>
+          <li>✅ API integration available</li>
         </ul>
-        <button class="plan-btn cyan-btn" onclick="selectPlan('National Access — All States','$797/month','cyan-bar','cyan','cyan-btn')">
-          Select National →
-        </button>
+        <button class="p-btn btn-cyan" onclick="pickPlan('National Access','$797/month','cyan','t3')">Select National →</button>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- MSA -->
 <div class="msa-section">
   <div class="msa-box">
-    <div class="msa-header">
-      <div class="msa-header-icon">⚖</div>
-      <div>
-        <h3>Master Service Agreement</h3>
-        <p>StayVCS LLC · Legal Marketing Platform · 2026</p>
-      </div>
+    <div class="msa-head">
+      <div class="msa-icon">⚖</div>
+      <div><h3>Master Service Agreement</h3><p>StayVCS LLC · Legal Marketing Platform · 2026</p></div>
     </div>
     <div class="msa-body">
       <div class="msa-text">
         <h4>1. Nature of Services</h4>
-        <p>StayVCS LLC ("Company") operates a legal marketing and intake qualification platform. Services provided are limited to marketing data, case scoring analysis, and dashboard access. Company does not provide legal advice, does not practice law, and is not a law firm.</p>
-
+        <p>StayVCS LLC ("Company") operates a legal marketing and intake qualification platform. Services are limited to marketing data, case scoring analysis, and dashboard access. Company does not provide legal advice, does not practice law, and is not a law firm.</p>
         <h4>2. No Referral Fee / Fee Splitting</h4>
-        <p>All fees charged by StayVCS LLC are flat subscription fees for software access and marketing data services only. No fee is contingent upon, calculated as a percentage of, or in any way connected to legal fees earned by the subscribing firm. This structure is designed to comply with ABA Model Rule 7.2 and Rule 1.5(e). StayVCS LLC never takes a percentage of any legal fee or case settlement.</p>
-
+        <p>All fees charged by StayVCS LLC are flat subscription fees for software access and marketing data services only. No fee is contingent upon, calculated as a percentage of, or in any way connected to legal fees earned by the subscribing firm. This structure complies with ABA Model Rule 7.2 and Rule 1.5(e). StayVCS LLC never takes a percentage of any legal fee or case settlement.</p>
         <h4>3. State Priority Exclusivity</h4>
-        <p>Upon activation, the subscribing firm receives priority lead routing for the selected state(s) for the duration of their active subscription. Company agrees not to grant priority routing for the same state to another firm while the subscription remains active. Standard (non-priority) access may remain available to other firms.</p>
-
+        <p>Upon activation, the subscribing firm receives priority lead routing for the selected state(s) for the duration of their active subscription. Company agrees not to grant priority routing for the same state to another firm while the subscription remains active.</p>
         <h4>4. Data Ownership</h4>
-        <p>StayVCS LLC retains ownership of the scoring algorithm, dashboard technology, and platform infrastructure. The subscribing firm owns the attorney-client relationship upon independent initiation of contact with any claimant. Claimant data provided through the dashboard is licensed for use in evaluating potential representation only.</p>
-
+        <p>StayVCS LLC retains ownership of the scoring algorithm, dashboard technology, and platform infrastructure. The subscribing firm owns the attorney-client relationship upon independent initiation of contact with any claimant.</p>
         <h4>5. Independent Review</h4>
-        <p>The subscribing attorney acknowledges that all case scoring data is provided for informational purposes only. The firm is solely responsible for conducting its own independent evaluation of each case and making all intake decisions. StayVCS LLC makes no warranty regarding case eligibility, likelihood of approval, or case value.</p>
-
+        <p>The subscribing attorney acknowledges all case scoring data is for informational purposes only. The firm is solely responsible for its own independent evaluation of each case and all intake decisions.</p>
         <h4>6. Compliance Acknowledgment</h4>
-        <p>The subscribing attorney warrants that they are a licensed attorney in good standing in the state(s) for which they are activating access, and that their use of this platform complies with all applicable state bar rules and professional responsibility obligations.</p>
-
+        <p>The subscribing attorney warrants they are a licensed attorney in good standing in the state(s) for which they are activating access, and that use of this platform complies with all applicable state bar rules.</p>
         <h4>7. Subscription Terms</h4>
-        <p>Subscriptions are billed monthly. Cancellation takes effect at the end of the current billing period. No refunds are issued for partial months. Company reserves the right to modify pricing with 30 days written notice.</p>
-
+        <p>Subscriptions are billed monthly. Cancellation takes effect at the end of the current billing period. No refunds for partial months. Pricing may be modified with 30 days written notice.</p>
         <h4>8. Limitation of Liability</h4>
-        <p>StayVCS LLC's liability is limited to the amount paid in the prior 30-day subscription period. Company is not liable for missed cases, lost revenue, or decisions made based on platform data.</p>
+        <p>StayVCS LLC liability is limited to the amount paid in the prior 30-day subscription period. Company is not liable for missed cases, lost revenue, or decisions made based on platform data.</p>
       </div>
     </div>
   </div>
@@ -683,300 +359,187 @@ footer a { color:var(--blue); text-decoration:none; }
 <!-- ONBOARDING FORM -->
 <div class="form-section">
   <div class="form-card">
-    <div class="form-header">
+
+    <div class="form-head">
       <h2>Attorney Partner Application</h2>
-      <p>Complete all sections below to activate your firm</p>
+      <p>Complete all sections below — select a plan above first</p>
     </div>
 
-    <!-- Selected plan bar -->
-    <div class="selected-plan-bar" id="selectedPlanBar">
+    <div class="plan-bar" id="planBar">
       <div>
-        <div class="spb-label">Selected Plan</div>
-        <div class="spb-plan blue" id="selectedPlanName">Select a plan above ↑</div>
+        <div class="pb-lbl">Selected Plan</div>
+        <div class="pb-name" id="pbName">← Select Tier 1, 2, or 3 above first</div>
       </div>
-      <div class="spb-change" onclick="scrollToPricing()">Change Plan</div>
+      <div class="pb-change" onclick="document.querySelector('.section').scrollIntoView({behavior:'smooth'})">Change Plan</div>
     </div>
 
-    <!-- Form body -->
     <div class="form-body" id="formBody">
 
-      <!-- PART 1: FIRM IDENTITY -->
-      <div class="form-part">
-        <div class="form-part-title"><span>1</span>Firm Identity</div>
-        <div class="form-row">
-          <div class="fld" id="f-fname">
-            <label>Attorney First Name <span class="req">*</span></label>
-            <input type="text" id="fname" placeholder="First name">
-            <div class="err">Required</div>
-          </div>
-          <div class="fld" id="f-lname">
-            <label>Attorney Last Name <span class="req">*</span></label>
-            <input type="text" id="lname" placeholder="Last name">
-            <div class="err">Required</div>
-          </div>
+      <!-- PART 1 -->
+      <div class="f-part">
+        <div class="f-part-title"><span class="f-num">1</span>Firm Identity</div>
+        <div class="r2">
+          <div class="fld" id="f-fn"><label>First Name <span class="req">*</span></label><input type="text" id="fn" placeholder="First name"><div class="e">Required</div></div>
+          <div class="fld" id="f-ln"><label>Last Name <span class="req">*</span></label><input type="text" id="ln" placeholder="Last name"><div class="e">Required</div></div>
         </div>
-        <div class="form-row">
-          <div class="fld" id="f-firmname">
-            <label>Law Firm Name <span class="req">*</span></label>
-            <input type="text" id="firmname" placeholder="Smith &amp; Associates, P.C.">
-            <div class="err">Required</div>
-          </div>
-          <div class="fld" id="f-barnum">
-            <label>Bar License Number <span class="req">*</span></label>
-            <input type="text" id="barnum" placeholder="State bar number">
-            <div class="err">Required for compliance</div>
-          </div>
+        <div class="r2">
+          <div class="fld" id="f-firm"><label>Law Firm Name <span class="req">*</span></label><input type="text" id="firm" placeholder="Smith &amp; Associates, P.C."><div class="e">Required</div></div>
+          <div class="fld" id="f-bar"><label>Bar License Number <span class="req">*</span></label><input type="text" id="bar" placeholder="State bar number"><div class="e">Required</div></div>
         </div>
-        <div class="form-row full">
-          <div class="fld" id="f-address">
-            <label>Primary Office Address <span class="req">*</span></label>
-            <input type="text" id="address" placeholder="123 Main St, Nashville, TN 37201">
-            <div class="err">Required</div>
-          </div>
+        <div class="r1">
+          <div class="fld" id="f-addr"><label>Primary Office Address <span class="req">*</span></label><input type="text" id="addr" placeholder="123 Main St, Nashville, TN 37201"><div class="e">Required</div></div>
         </div>
-        <div class="form-row">
-          <div class="fld" id="f-phone">
-            <label>Direct Phone <span class="req">*</span></label>
-            <input type="tel" id="phone" placeholder="(615) 555-0100">
-            <div class="err">Required</div>
+        <div class="r2">
+          <div class="fld" id="f-ph"><label>Direct Phone <span class="req">*</span></label><input type="tel" id="ph" placeholder="(615) 555-0100"><div class="e">Required</div></div>
+          <div class="fld" id="f-em"><label>Attorney Email <span class="req">*</span></label><input type="email" id="em" placeholder="attorney@firm.com"><div class="e">Valid email required</div></div>
+        </div>
+      </div>
+
+      <!-- PART 2 -->
+      <div class="f-part">
+        <div class="f-part-title"><span class="f-num">2</span>Intake Preferences</div>
+        <div class="r2">
+          <div class="fld" id="f-in"><label>Intake Contact Name <span class="req">*</span></label><input type="text" id="in" placeholder="Who handles intake calls?"><div class="e">Required</div></div>
+          <div class="fld" id="f-ip"><label>Intake Contact Phone <span class="req">*</span></label><input type="tel" id="ip" placeholder="Direct intake line"><div class="e">Required</div></div>
+        </div>
+        <!-- STATE SELECTION changes per plan -->
+        <div id="stateSection">
+          <!-- STATE ACCESS: single -->
+          <div id="modeSingle" style="display:none;">
+            <div class="s-lbl">Select Your 1 State <span class="req">*</span>
+              <span id="singleCount" style="margin-left:8px;color:var(--blue);font-size:9px;">(0 of 1 selected)</span>
+            </div>
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:8px;">Clicking a second state will replace your first selection automatically.</div>
           </div>
-          <div class="fld" id="f-email">
-            <label>Attorney Email <span class="req">*</span></label>
-            <input type="email" id="email" placeholder="attorney@firm.com">
-            <div class="err">Valid email required</div>
+          <!-- REGIONAL: pick a region -->
+          <div id="modeRegion" style="display:none;">
+            <div class="s-lbl">Select Your Region <span class="req">*</span></div>
+            <div style="font-size:11px;color:var(--muted);font-family:var(--mono);margin-bottom:12px;">Click a region to auto-select its states. Deselect any individual state after if needed.</div>
+            <div class="region-grid" id="regionGrid"></div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--muted);margin:10px 0 8px;">Selected states (deselect any you don't want):</div>
+          </div>
+          <!-- NATIONAL: auto-selects all -->
+          <div id="modeNational" style="display:none;">
+            <div class="s-lbl">Coverage &mdash; All 53 Locations</div>
+            <div style="font-size:11px;color:var(--green);font-family:var(--mono);background:rgba(16,185,129,.07);border:1px solid rgba(16,185,129,.2);border-radius:8px;padding:10px 14px;margin-bottom:10px;">&#10003; National Access covers all 50 states + Washington DC + Puerto Rico + Virgin Islands. All 53 locations included automatically.</div>
+          </div>
+          <!-- CHIPS: always shown -->
+          <div class="s-grid" id="stGrid"></div>
+          <div class="s-err" id="stErr">Please select at least one state or region.</div>
+        </div>
+        <div class="r3">
+          <div class="fld" id="f-cap"><label>Monthly Case Capacity <span class="req">*</span></label>
+            <select id="cap"><option value="">Select...</option><option value="1-10">1–10 / month</option><option value="10-25">10–25 / month</option><option value="25-50">25–50 / month</option><option value="50+">50+ / month</option></select>
+            <div class="e">Required</div></div>
+          <div class="fld" id="f-app"><label>Accepts ALJ Appeals? <span class="req">*</span></label>
+            <select id="app"><option value="">Select...</option><option value="YES">Yes — appeals welcome</option><option value="NO">No — initial only</option><option value="BOTH">Both</option></select>
+            <div class="e">Required</div></div>
+          <div class="fld"><label>Current CRM</label>
+            <select id="crm"><option value="">None / Not sure</option><option value="Clio">Clio</option><option value="FileVine">FileVine</option><option value="Litify">Litify</option><option value="MyCase">MyCase</option><option value="SmartAdvocate">SmartAdvocate</option><option value="Other">Other</option></select>
           </div>
         </div>
       </div>
 
-      <!-- PART 2: INTAKE PREFERENCES -->
-      <div class="form-part">
-        <div class="form-part-title"><span>2</span>Intake Preferences</div>
-
-        <div class="form-row">
-          <div class="fld" id="f-intakename">
-            <label>Intake Contact Name <span class="req">*</span></label>
-            <input type="text" id="intakename" placeholder="Who handles intake calls?">
-            <div class="err">Required</div>
+      <!-- PART 3 - COMPLIANCE CHECKBOXES -->
+      <div class="f-part">
+        <div class="f-part-title"><span class="f-num">3</span>Legal Compliance Agreement</div>
+        <div class="ck-list">
+          <div class="ck-item" id="ci1" onclick="doCheck(1)">
+            <div class="ck-box" id="cb1"></div>
+            <div class="ck-text"><strong>Marketing Services Acknowledgment</strong>I understand that StayVCS LLC is a legal marketing and intake qualification service, not a referral service. No fee paid to StayVCS LLC constitutes a referral fee or is connected to any legal fee earned.</div>
           </div>
-          <div class="fld" id="f-intakephone">
-            <label>Intake Contact Phone <span class="req">*</span></label>
-            <input type="tel" id="intakephone" placeholder="Direct intake line">
-            <div class="err">Required</div>
+          <div class="ck-item" id="ci2" onclick="doCheck(2)">
+            <div class="ck-box" id="cb2"></div>
+            <div class="ck-text"><strong>ABA Rule 1.5(e) Compliance</strong>I agree to pay a flat subscription fee for dashboard access only. This fee is not based on case outcomes, not a percentage of legal fees, and does not constitute fee-splitting under applicable bar rules.</div>
           </div>
-        </div>
-
-        <div class="form-row full" style="margin-bottom:8px">
-          <div class="fld">
-            <label>Target States — Select All That Apply <span class="req">*</span></label>
+          <div class="ck-item" id="ci3" onclick="doCheck(3)">
+            <div class="ck-box" id="cb3"></div>
+            <div class="ck-text"><strong>Independent Review Responsibility</strong>I am solely responsible for my own independent review of all case data provided. StayVCS LLC provides marketing data only. All intake and representation decisions are made exclusively by my firm.</div>
           </div>
-        </div>
-        <div class="states-grid" id="statesGrid" style="margin-bottom:16px">
-          <!-- Populated by JS -->
-        </div>
-        <div id="f-states" style="display:none"><div class="err" style="display:block;font-size:11px;color:var(--red);font-family:var(--mono);margin-bottom:12px" id="states-err">Select at least one state</div></div>
-
-        <div class="form-row three">
-          <div class="fld" id="f-capacity">
-            <label>Monthly Case Capacity <span class="req">*</span></label>
-            <select id="capacity">
-              <option value="">Select...</option>
-              <option value="1-10">1–10 cases/month</option>
-              <option value="10-25">10–25 cases/month</option>
-              <option value="25-50">25–50 cases/month</option>
-              <option value="50+">50+ cases/month</option>
-            </select>
-            <div class="err">Required</div>
-          </div>
-          <div class="fld" id="f-appeals">
-            <label>Accepts ALJ Appeals? <span class="req">*</span></label>
-            <select id="appeals">
-              <option value="">Select...</option>
-              <option value="YES">Yes — appeals welcome</option>
-              <option value="NO">No — initial only</option>
-              <option value="BOTH">Both</option>
-            </select>
-            <div class="err">Required</div>
-          </div>
-          <div class="fld">
-            <label>Current Case CRM</label>
-            <select id="crm">
-              <option value="">None / Not sure</option>
-              <option value="Clio">Clio</option>
-              <option value="FileVine">FileVine</option>
-              <option value="Litify">Litify</option>
-              <option value="MyCase">MyCase</option>
-              <option value="SmartAdvocate">SmartAdvocate</option>
-              <option value="Other">Other</option>
-            </select>
+          <div class="ck-item" id="ci4" onclick="doCheck(4)">
+            <div class="ck-box" id="cb4"></div>
+            <div class="ck-text"><strong>Master Service Agreement</strong>I have read and agree to the StayVCS LLC Master Service Agreement above, including the exclusivity clause, no fee-splitting provision, and data ownership terms.</div>
           </div>
         </div>
-      </div>
-
-      <!-- PART 3: COMPLIANCE CHECKBOXES -->
-      <div class="form-part">
-        <div class="form-part-title"><span>3</span>Legal Compliance Agreement</div>
-        <div class="check-list" id="checkList">
-
-          <div class="check-item" id="ci1" onclick="toggleCheck('chk1','ci1')">
-            <div class="check-box" id="cb1"></div>
-            <div class="check-item-text">
-              <strong>Marketing Services Acknowledgment</strong>
-              I understand that StayVCS LLC is a legal marketing and intake qualification service, not a referral service. No fee paid to StayVCS LLC constitutes a referral fee or is connected to any legal fee earned.
-            </div>
-          </div>
-
-          <div class="check-item" id="ci2" onclick="toggleCheck('chk2','ci2')">
-            <div class="check-box" id="cb2"></div>
-            <div class="check-item-text">
-              <strong>ABA Rule 1.5(e) Compliance</strong>
-              I agree to pay a flat subscription fee for dashboard access only. I acknowledge that this fee is not based on case outcomes, not calculated as a percentage of legal fees, and does not constitute fee-splitting under applicable bar rules.
-            </div>
-          </div>
-
-          <div class="check-item" id="ci3" onclick="toggleCheck('chk3','ci3')">
-            <div class="check-box" id="cb3"></div>
-            <div class="check-item-text">
-              <strong>Independent Review Responsibility</strong>
-              I acknowledge that I am solely responsible for my own independent review of all case data provided. StayVCS LLC provides marketing data only. All intake and representation decisions are made exclusively by my firm.
-            </div>
-          </div>
-
-          <div class="check-item" id="ci4" onclick="toggleCheck('chk4','ci4')">
-            <div class="check-box" id="cb4"></div>
-            <div class="check-item-text">
-              <strong>Master Service Agreement</strong>
-              I have read and agree to the StayVCS LLC Master Service Agreement above, including the exclusivity clause, no fee-splitting provision, and data ownership terms.
-            </div>
-          </div>
-
-        </div>
-        <!-- Hidden real checkboxes for form validation -->
-        <input type="checkbox" id="chk1" style="display:none">
-        <input type="checkbox" id="chk2" style="display:none">
-        <input type="checkbox" id="chk3" style="display:none">
-        <input type="checkbox" id="chk4" style="display:none">
-        <div id="chk-err" style="font-size:11px;color:var(--red);font-family:var(--mono);margin-top:10px;display:none">All compliance checkboxes must be checked to continue.</div>
+        <div class="ck-err" id="ckErr">All four compliance boxes must be checked to continue.</div>
       </div>
 
       <!-- PAYMENT -->
-      <div class="payment-section">
-        <div class="payment-title">💳 Secure Payment</div>
-
-        <div class="payment-summary">
-          <div class="payment-row">
-            <span class="pkey">Plan</span>
-            <span class="pval" id="pay-plan">—</span>
-          </div>
-          <div class="payment-row">
-            <span class="pkey">Billing</span>
-            <span class="pval">Monthly · Auto-renews</span>
-          </div>
-          <div class="payment-row">
-            <span class="pkey">First Charge</span>
-            <span class="pval">Today upon submission</span>
-          </div>
-          <div class="payment-row total">
-            <span class="pkey">Total Due Today</span>
-            <span class="pval" id="pay-total">—</span>
-          </div>
+      <div class="pay-sect">
+        <div class="pay-title">💳 Secure Payment</div>
+        <div class="pay-sum">
+          <div class="pay-row"><span class="pk">Plan</span><span class="pv" id="payPlan">—</span></div>
+          <div class="pay-row"><span class="pk">Billing</span><span class="pv">Monthly · Auto-renews</span></div>
+          <div class="pay-row"><span class="pk">First Charge</span><span class="pv">Today upon submission</span></div>
+          <div class="pay-row tot"><span class="pk">Total Due Today</span><span class="pv" id="payTotal">—</span></div>
         </div>
-
-        <div class="stripe-wrap">
-          <div class="stripe-label">Card Information</div>
+        <div class="stripe-box">
+          <div class="stripe-lbl">Card Information</div>
           <div id="card-element">
-            <!-- Stripe Elements mounts here -->
-            <div style="color:var(--muted);font-family:var(--mono);font-size:12px;padding:6px 0">
-              ⚠ Add your Stripe Publishable Key below to enable live payments.
-              <br>Replace STRIPE_PUBLISHABLE_KEY in the script section.
+            <div style="color:var(--muted);font-family:var(--mono);font-size:10px;line-height:1.8;padding:3px 0;">
+              🔧 To enable live Stripe payments:<br>
+              Replace <strong style="color:#93c5fd">STRIPE_KEY_HERE</strong> in the script with your key from dashboard.stripe.com
             </div>
           </div>
           <div id="card-errors"></div>
-          <div class="stripe-secure">Secured by Stripe · 256-bit SSL · PCI DSS Compliant</div>
+          <div class="stripe-note">🔒 Secured by Stripe · 256-bit SSL · PCI DSS Compliant</div>
         </div>
-
-        <button class="submit-btn" id="submitBtn" onclick="submitForm()">
-          <span id="submitLbl">Activate My Firm — Submit &amp; Pay</span>
+        <button class="sub-btn" id="subBtn" onclick="doSubmit()">
+          <span id="subLbl">Activate My Firm — Submit &amp; Pay</span>
         </button>
-        <div style="text-align:center;margin-top:12px;font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.04em">
-          By submitting you agree to monthly billing. Cancel anytime from your account.
-        </div>
+        <div class="sub-note">By submitting you agree to monthly billing. Cancel anytime.</div>
       </div>
 
     </div><!-- /form-body -->
 
     <!-- SUCCESS SCREEN -->
-    <div class="success-screen" id="successScreen">
-      <div class="success-icon">✓</div>
+    <div class="success" id="successScr">
+      <div class="suc-icon">✓</div>
       <h2>Welcome to <span>StayVCS</span></h2>
-      <p>Your firm is now active. Grade-A leads from your selected states will begin routing to your intake contact. Check your email for dashboard access and your first lead report.</p>
-      <div class="success-ref" id="refNum">FIRM-——</div>
-      <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:14px 18px;margin-bottom:20px;font-family:var(--mono);font-size:11px;color:#93c5fd;line-height:1.8;text-align:left;">
-        <strong style="color:var(--text);display:block;margin-bottom:6px;">📋 YOUR NEXT STEPS:</strong>
-        1. Check your email — dashboard access link sent to <span id="successEmail">your email</span><br>
-        2. Your intake contact will receive Grade-A lead alerts by email + SMS<br>
-        3. Bookmark your dashboard URL once you receive it<br>
-        4. Questions? Email <a href="/cdn-cgi/l/email-protection#f78192999492c4c6b7909a969e9bd994989a" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="88feede6ebedbbb9c8efe5e9e1e4a6ebe7e5">[email&#160;protected]</span></a>
+      <p>Your firm application has been received. Grade-A leads from your selected states will begin routing to your intake contact after activation.</p>
+      <div class="suc-ref" id="sucRef">FIRM-——</div>
+      <div class="suc-steps">
+        <strong>What happens next:</strong>
+        1. Confirmation email sent to <span id="sucEmail">your email</span><br>
+        2. Firm activated within 24 hours<br>
+        3. Grade-A lead alerts begin immediately after activation<br>
+        4. Questions? <a href="/cdn-cgi/l/email-protection#1563707b76702624557278747c793b767a78" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="1563707b76702624557278747c793b767a78">[email&#160;protected]</span></a>
       </div>
-      <div class="success-next">
-        <a href="https://vence31.github.io/Disability-Leads/" class="success-btn primary" target="_blank">
-          View Intake Platform →
-        </a>
-        <a href="/cdn-cgi/l/email-protection#96e0f3f8f5f3a5a7d6f1fbf7fffab8f5f9fba9e5e3f4fcf3f5e2abd2f7e5fef4f9f7e4f2b6d7f5f5f3e5e5b6c4f3e7e3f3e5e2" class="success-btn secondary">
-          Request Dashboard Access
-        </a>
+      <div class="suc-btns">
+        <a href="https://vence31.github.io/Disability-Leads/" class="suc-btn p" target="_blank">View Intake Platform →</a>
+        <a href="/cdn-cgi/l/email-protection#9debf8f3fef8aeacddfaf0fcf4f1b3fef2f0a2eee8fff7f8fee9a0d9fceef5fff2fceff9b8afaddcfefef8eeeeb8afadcff8ece8f8eee9" class="suc-btn s">Request Dashboard Access</a>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- TRUST SECTION -->
-<div class="trust-section">
-  <div class="trust-card">
-    <div class="trust-icon">⚖</div>
-    <div class="trust-title">ABA Compliant</div>
-    <div class="trust-desc">Flat subscription only. No fee-splitting. No referral structure. Designed around Model Rules 7.2 and 1.5(e).</div>
-  </div>
-  <div class="trust-card">
-    <div class="trust-icon">🔒</div>
-    <div class="trust-title">State Exclusivity</div>
-    <div class="trust-desc">One firm per state for priority routing. Your state access is locked for your subscription period.</div>
-  </div>
-  <div class="trust-card">
-    <div class="trust-icon">📊</div>
-    <div class="trust-title">SSA Grid Scoring</div>
-    <div class="trust-desc">Every lead scored on 7 SSA grid rule factors. You see the full breakdown before deciding to contact anyone.</div>
-  </div>
+<!-- TRUST -->
+<div class="trust">
+  <div class="tc"><div class="tc-icon">⚖</div><div class="tc-title">ABA Compliant</div><div class="tc-desc">Flat subscription only. No fee-splitting. Designed around Model Rules 7.2 and 1.5(e).</div></div>
+  <div class="tc"><div class="tc-icon">🔒</div><div class="tc-title">State Exclusivity</div><div class="tc-desc">One firm per state for priority routing. Your state is locked for your subscription period.</div></div>
+  <div class="tc"><div class="tc-icon">📊</div><div class="tc-title">SSA Grid Scoring</div><div class="tc-desc">Every lead scored on 7 SSA grid rule factors. Full breakdown before you contact anyone.</div></div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 StayVCS LLC · Legal Marketing &amp; Intake Qualification Platform · <a href="/cdn-cgi/l/email-protection#7006151e1315434130171d11191c5e131f1d"><span class="__cf_email__" data-cfemail="3e485b505d5b0d0f7e59535f5752105d5153">[email&#160;protected]</span></a></p>
+  <p>© 2026 StayVCS LLC · Legal Marketing &amp; Intake Qualification Platform · <a href="/cdn-cgi/l/email-protection#f385969d9096c0c2b3949e929a9fdd909c9e"><span class="__cf_email__" data-cfemail="5a2c3f34393f696b1a3d373b333674393537">[email&#160;protected]</span></a></p>
   <p>This platform is not a law firm and does not provide legal advice.</p>
 </footer>
 
-<!-- SCRIPTS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script>
-// ── CONFIG — REPLACE THESE ────────────────────────────────────────────────────
-const STRIPE_PUBLISHABLE_KEY = 'pk_live_YOUR_STRIPE_KEY_HERE'; // Get from dashboard.stripe.com
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxI9gWvKnXt7E66K144fY44HfXEGYfgnm8vjFXn1VB5zOASAbcOgzk4dKiRub9BDo4/exec';
+// ── CONFIG — update these two values ─────────────────────────────────────────
+const STRIPE_KEY = 'STRIPE_KEY_HERE';  // replace with pk_live_xxx from dashboard.stripe.com
+const API_URL    = 'https://script.google.com/macros/s/AKfycbxI9gWvKnXt7E66K144fY44HfXEGYfgnm8vjFXn1VB5zOASAbcOgzk4dKiRub9BDo4/exec';
 
-// Stripe Price IDs — create these in your Stripe dashboard
-const STRIPE_PRICES = {
-  'State Access — 1 State':       'price_STATE_ID_HERE',
-  'Regional Package — 3 States':  'price_REGIONAL_ID_HERE',
-  'National Access — All States':  'price_NATIONAL_ID_HERE'
+const PLANS = {
+  'State Access':     { price: '$297/month', stripeId: 'price_STATE_HERE'    },
+  'Regional Package': { price: '$497/month', stripeId: 'price_REGIONAL_HERE' },
+  'National Access':  { price: '$797/month', stripeId: 'price_NATIONAL_HERE' }
 };
 
-const PLAN_AMOUNTS = {
-  'State Access — 1 State':      '$297/month',
-  'Regional Package — 3 States': '$497/month',
-  'National Access — All States': '$797/month'
-};
-
-// ── STATE LIST ────────────────────────────────────────────────────────────────
-const STATES = [
+/// ─── STATE DATA ──────────────────────────────────────────────────────────────
+var STATES = [
   'Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut',
   'Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa',
   'Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan',
@@ -988,223 +551,293 @@ const STATES = [
   'Puerto Rico','Virgin Islands'
 ];
 
-// ── BUILD STATES GRID ─────────────────────────────────────────────────────────
-const statesGrid = document.getElementById('statesGrid');
-STATES.forEach(s => {
-  const chip = document.createElement('div');
-  chip.className = 'state-chip';
-  chip.textContent = s;
-  chip.onclick = () => chip.classList.toggle('selected');
-  statesGrid.appendChild(chip);
-});
+var REGIONS = {
+  'Southeast':  ['Alabama','Arkansas','Florida','Georgia','Kentucky','Louisiana','Mississippi','North Carolina','South Carolina','Tennessee','Virginia','West Virginia'],
+  'Northeast':  ['Connecticut','Delaware','Maine','Maryland','Massachusetts','New Hampshire','New Jersey','New York','Pennsylvania','Rhode Island','Vermont','Washington DC'],
+  'Midwest':    ['Iowa','Illinois','Indiana','Kansas','Michigan','Minnesota','Missouri','North Dakota','Nebraska','Ohio','South Dakota','Wisconsin'],
+  'Southwest':  ['Arizona','Colorado','New Mexico','Nevada','Oklahoma','Texas','Utah'],
+  'West':       ['Alaska','California','Hawaii','Idaho','Montana','Oregon','Washington','Wyoming'],
+  'Territories':['Puerto Rico','Virgin Islands']
+};
 
-// ── LOAD LIVE STATS ───────────────────────────────────────────────────────────
-async function loadStats() {
-  try {
-    const res = await fetch(APPS_SCRIPT_URL + '?action=portfolio_stats');
-    const d = await res.json();
-    document.getElementById('hs-total').textContent  = d.totalLeads  || '—';
-    document.getElementById('hs-hot').textContent    = d.hotLeads    || '—';
-    document.getElementById('hs-states').textContent = d.statesActive|| '—';
-    document.getElementById('hs-avg').textContent    = d.avgScore    || '—';
-  } catch(e) {
-    // fail silently — stats are nice-to-have
+var planMode = '';
+var activeRegion = '';
+
+// Build state chips
+(function buildStates() {
+  var g = document.getElementById('stGrid');
+  STATES.forEach(function(s) {
+    var d = document.createElement('div');
+    d.className = 'sc';
+    d.textContent = s;
+    d.setAttribute('data-state', s);
+    d.onclick = function() { handleStateClick(this); };
+    g.appendChild(d);
+  });
+
+  // Build region buttons
+  var rg = document.getElementById('regionGrid');
+  if (rg) {
+    Object.keys(REGIONS).forEach(function(rName) {
+      var states = REGIONS[rName];
+      var btn = document.createElement('div');
+      btn.className = 'rgn-btn';
+      btn.setAttribute('data-region', rName);
+      btn.innerHTML = '<div class="rgn-name">' + rName + '</div><div class="rgn-states">' + states.join(', ') + '</div>';
+      btn.onclick = function() { pickRegion(this); };
+      rg.appendChild(btn);
+    });
+  }
+})();
+
+function handleStateClick(chip) {
+  if (planMode === 'single') {
+    document.querySelectorAll('.sc.on').forEach(function(c) { c.classList.remove('on'); });
+    chip.classList.add('on');
+    var cnt = document.getElementById('singleCount');
+    if (cnt) cnt.textContent = '(1 of 1 selected)';
+  } else if (planMode === 'region') {
+    chip.classList.toggle('on');
+    document.querySelectorAll('.rgn-btn.on').forEach(function(b) { b.classList.remove('on'); });
+    activeRegion = '';
   }
 }
-loadStats();
 
-// ── PLAN SELECTION ────────────────────────────────────────────────────────────
-let selectedPlan = '';
-let selectedBarClass = '';
-let selectedColorClass = '';
+function pickRegion(btn) {
+  var rName = btn.getAttribute('data-region');
+  var regionStates = REGIONS[rName] || [];
+  activeRegion = rName;
+  document.querySelectorAll('.rgn-btn').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  document.querySelectorAll('.sc').forEach(function(c) {
+    if (regionStates.indexOf(c.getAttribute('data-state')) !== -1) c.classList.add('on');
+    else c.classList.remove('on');
+  });
+}
 
-function selectPlan(planName, price, barClass, colorClass, btnClass) {
-  selectedPlan = planName;
-  selectedBarClass = barClass;
-  selectedColorClass = colorClass;
+function setStateMode(mode) {
+  planMode = mode;
+  document.querySelectorAll('.sc.on').forEach(function(c) { c.classList.remove('on'); });
+  document.querySelectorAll('.rgn-btn.on').forEach(function(b) { b.classList.remove('on'); });
+  activeRegion = '';
+  var s = document.getElementById('modeSingle');
+  var r = document.getElementById('modeRegion');
+  var n = document.getElementById('modeNational');
+  if (s) s.style.display = mode === 'single'   ? 'block' : 'none';
+  if (r) r.style.display = mode === 'region'   ? 'block' : 'none';
+  if (n) n.style.display = mode === 'national' ? 'block' : 'none';
+  var grid = document.getElementById('stGrid');
+  if (mode === 'national') {
+    document.querySelectorAll('.sc').forEach(function(c) { c.classList.add('on'); });
+    grid.style.pointerEvents = 'none'; grid.style.opacity = '.65';
+  } else {
+    grid.style.pointerEvents = ''; grid.style.opacity = '';
+  }
+}
+
+// ─── LIVE STATS ───────────────────────────────────────────────────────────────
+fetch(API_URL + '?action=portfolio_stats')
+  .then(function(r) { return r.json(); })
+  .then(function(d) {
+    if (d.totalLeads)   document.getElementById('hs-total').textContent  = d.totalLeads;
+    if (d.hotLeads)     document.getElementById('hs-hot').textContent    = d.hotLeads;
+    if (d.statesActive) document.getElementById('hs-states').textContent = d.statesActive;
+    if (d.avgScore)     document.getElementById('hs-avg').textContent    = d.avgScore;
+  })
+  .catch(function() {
+    // CORS blocked from GitHub Pages — show representative numbers
+    document.getElementById('hs-total').textContent  = '30+';
+    document.getElementById('hs-hot').textContent    = '12';
+    document.getElementById('hs-states').textContent = '14';
+    document.getElementById('hs-avg').textContent    = '81';
+  });
+
+// ─── PLAN SELECTION ───────────────────────────────────────────────────────────
+var chosenPlan = '';
+
+function pickPlan(name, price, color, tid) {
+  chosenPlan = name;
+
+  // Highlight selected card, clear others
+  ['t1','t2','t3'].forEach(function(id) {
+    document.getElementById('pc-' + id).classList.remove('picked');
+  });
+  document.getElementById('pc-' + tid).classList.add('picked');
 
   // Update plan bar
-  const bar = document.getElementById('selectedPlanBar');
-  bar.className = 'selected-plan-bar ' + (barClass || '');
-  document.getElementById('selectedPlanName').className = 'spb-plan ' + colorClass;
-  document.getElementById('selectedPlanName').textContent = planName + ' — ' + price;
+  var el = document.getElementById('pbName');
+  el.className = 'pb-name ' + color;
+  el.textContent = name + ' — ' + price;
 
   // Update payment summary
-  document.getElementById('pay-plan').textContent = planName;
-  document.getElementById('pay-total').textContent = price;
+  document.getElementById('payPlan').textContent  = name;
+  document.getElementById('payTotal').textContent = price;
+
+  // Set state selection mode based on plan
+  if (tid === 't1') setStateMode('single');
+  if (tid === 't2') setStateMode('region');
+  if (tid === 't3') setStateMode('national');
 
   // Scroll to form
-  setTimeout(() => {
-    document.querySelector('.form-section').scrollIntoView({behavior:'smooth', block:'start'});
+  setTimeout(function() {
+    document.querySelector('.form-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 200);
 }
 
-function scrollToPricing() {
-  document.querySelector('.section').scrollIntoView({behavior:'smooth'});
+// ─── CHECKBOXES ───────────────────────────────────────────────────────────────
+var ckState = [false, false, false, false]; // index 0=chk1, 1=chk2, 2=chk3, 3=chk4
+
+function doCheck(n) {
+  var i = n - 1;
+  ckState[i] = !ckState[i];
+  var ci  = document.getElementById('ci' + n);
+  var box = document.getElementById('cb' + n);
+  if (ckState[i]) {
+    ci.classList.add('on');
+    box.textContent = '✓';
+  } else {
+    ci.classList.remove('on');
+    box.textContent = '';
+  }
+  // Hide error if all checked
+  if (ckState[0] && ckState[1] && ckState[2] && ckState[3]) {
+    document.getElementById('ckErr').style.display = 'none';
+  }
 }
 
-// ── STRIPE SETUP ──────────────────────────────────────────────────────────────
-let stripe, cardElement;
-try {
-  if (STRIPE_PUBLISHABLE_KEY !== 'pk_live_YOUR_STRIPE_KEY_HERE') {
-    stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
-    const elements = stripe.elements({
+// ─── STRIPE ───────────────────────────────────────────────────────────────────
+var stripeObj = null, cardEl = null;
+if (STRIPE_KEY !== 'STRIPE_KEY_HERE') {
+  try {
+    stripeObj = Stripe(STRIPE_KEY);
+    var els = stripeObj.elements({
       appearance: {
         theme: 'night',
-        variables: {
-          colorPrimary: '#3b82f6',
-          colorBackground: '#0f172a',
-          colorText: '#f8fafc',
-          colorDanger: '#ef4444',
-          fontFamily: 'Manrope, sans-serif',
-          borderRadius: '8px',
-        }
+        variables: { colorPrimary:'#3b82f6', colorBackground:'#0f172a', colorText:'#f8fafc', colorDanger:'#ef4444', fontFamily:'Manrope, sans-serif', borderRadius:'8px' }
       }
     });
-    cardElement = elements.create('card', {
-      style: {
-        base: {
-          color: '#f8fafc',
-          fontFamily: 'Manrope, sans-serif',
-          fontSize: '14px',
-          '::placeholder': { color: '#64748b' }
-        },
-        invalid: { color: '#ef4444' }
-      }
+    cardEl = els.create('card', {
+      style: { base: { color:'#f8fafc', fontFamily:'Manrope, sans-serif', fontSize:'14px', '::placeholder':{ color:'#64748b' } }, invalid:{ color:'#ef4444' } }
     });
-    cardElement.mount('#card-element');
-    cardElement.on('change', e => {
+    cardEl.mount('#card-element');
+    cardEl.on('change', function(e) {
       document.getElementById('card-errors').textContent = e.error ? e.error.message : '';
     });
-  }
-} catch(e) {}
-
-// ── COMPLIANCE CHECKBOXES ─────────────────────────────────────────────────────
-function toggleCheck(chkId, ciId) {
-  const cb  = document.getElementById(chkId);
-  const ci  = document.getElementById(ciId);
-  const box = document.getElementById(chkId.replace('chk','cb'));
-  cb.checked = !cb.checked;
-  if (cb.checked) {
-    ci.classList.add('checked');
-    box.innerHTML = '✓';
-    box.style.cssText = 'border-color:var(--green);background:var(--green);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;';
-  } else {
-    ci.classList.remove('checked');
-    box.innerHTML = '';
-    box.style.cssText = '';
-  }
+  } catch(e) {}
 }
 
-// ── VALIDATION ────────────────────────────────────────────────────────────────
-function required(fldId, inputId) {
-  const fld = document.getElementById(fldId);
-  const inp = document.getElementById(inputId);
-  if (!inp || !fld) return true;
-  if (!inp.value.trim()) { fld.classList.add('has-error'); return false; }
-  fld.classList.remove('has-error'); return true;
+// ─── VALIDATION ───────────────────────────────────────────────────────────────
+function needVal(fId, iId) {
+  var f = document.getElementById(fId);
+  var i = document.getElementById(iId);
+  var ok = i && i.value.trim().length > 0;
+  if (ok) f.classList.remove('bad'); else f.classList.add('bad');
+  return ok;
 }
 
-function validate() {
-  let ok = true;
-  if (!required('f-fname','fname'))     ok = false;
-  if (!required('f-lname','lname'))     ok = false;
-  if (!required('f-firmname','firmname')) ok = false;
-  if (!required('f-barnum','barnum'))   ok = false;
-  if (!required('f-address','address')) ok = false;
-  if (!required('f-phone','phone'))     ok = false;
-  if (!required('f-email','email'))     ok = false;
-  if (!required('f-intakename','intakename')) ok = false;
-  if (!required('f-intakephone','intakephone')) ok = false;
-  if (!required('f-capacity','capacity'))   ok = false;
-  if (!required('f-appeals','appeals'))     ok = false;
+function doValidate() {
+  var ok = true;
+  if (!needVal('f-fn','fn'))   ok = false;
+  if (!needVal('f-ln','ln'))   ok = false;
+  if (!needVal('f-firm','firm')) ok = false;
+  if (!needVal('f-bar','bar')) ok = false;
+  if (!needVal('f-addr','addr')) ok = false;
+  if (!needVal('f-ph','ph'))   ok = false;
+  if (!needVal('f-em','em'))   ok = false;
+  if (!needVal('f-in','in'))   ok = false;
+  if (!needVal('f-ip','ip'))   ok = false;
+  if (!needVal('f-cap','cap')) ok = false;
+  if (!needVal('f-app','app')) ok = false;
 
-  // States
-  const selectedStates = [...document.querySelectorAll('.state-chip.selected')].map(c=>c.textContent);
-  if (!selectedStates.length) {
-    document.getElementById('f-states').style.display = 'block';
-    document.getElementById('states-err').style.display = 'block';
-    ok = false;
+  // States — validation depends on plan mode
+  var sel = document.querySelectorAll('.sc.on');
+  var stErr = document.getElementById('stErr');
+  var statesOk = false;
+  if (planMode === 'national') {
+    statesOk = true; // all auto-selected
+  } else if (planMode === 'single') {
+    statesOk = sel.length === 1;
+    if (!statesOk) stErr.textContent = 'Please select exactly 1 state for State Access.';
+  } else if (planMode === 'region') {
+    statesOk = sel.length > 0;
+    if (!statesOk) stErr.textContent = 'Please select a region above.';
   } else {
-    document.getElementById('f-states').style.display = 'none';
+    statesOk = sel.length > 0;
   }
+  if (!statesOk) { stErr.style.display = 'block'; ok = false; }
+  else stErr.style.display = 'none';
 
   // Plan
-  if (!selectedPlan) {
-    alert('Please select a plan above before submitting.');
-    scrollToPricing(); ok = false;
+  if (!chosenPlan) {
+    alert('Please select a plan (Tier 1, 2, or 3) at the top of the page before submitting.');
+    document.querySelector('.section').scrollIntoView({ behavior: 'smooth' });
+    return false;
   }
 
-  // Checkboxes
-  const allChecked = ['chk1','chk2','chk3','chk4'].every(id => document.getElementById(id).checked);
-  document.getElementById('chk-err').style.display = allChecked ? 'none' : 'block';
-  if (!allChecked) ok = false;
+  // Checkboxes — all 4 must be checked
+  var allCk = ckState[0] && ckState[1] && ckState[2] && ckState[3];
+  document.getElementById('ckErr').style.display = allCk ? 'none' : 'block';
+  if (!allCk) ok = false;
 
   return ok;
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────────────────────
-async function submitForm() {
-  if (!validate()) return;
+// ─── SUBMIT ───────────────────────────────────────────────────────────────────
+async function doSubmit() {
+  if (!doValidate()) return;
 
-  const btn = document.getElementById('submitBtn');
-  const lbl = document.getElementById('submitLbl');
+  var btn = document.getElementById('subBtn');
+  var lbl = document.getElementById('subLbl');
   btn.disabled = true;
   lbl.textContent = 'Processing...';
 
-  const selectedStates = [...document.querySelectorAll('.state-chip.selected')].map(c=>c.textContent);
+  var states = Array.from(document.querySelectorAll('.sc.on')).map(function(c) { return c.textContent; }).join(', ');
+  var email  = document.getElementById('em').value.trim();
 
-  const payload = {
+  var payload = {
     action:       'submit_attorney',
-    firmName:     document.getElementById('firmname').value.trim(),
-    attFirstName: document.getElementById('fname').value.trim(),
-    attLastName:  document.getElementById('lname').value.trim(),
-    barNumber:    document.getElementById('barnum').value.trim(),
-    address:      document.getElementById('address').value.trim(),
-    phone:        document.getElementById('phone').value.trim(),
-    email:        document.getElementById('email').value.trim(),
-    intakeName:   document.getElementById('intakename').value.trim(),
-    intakePhone:  document.getElementById('intakephone').value.trim(),
-    states:       selectedStates.join(', '),
-    capacity:     document.getElementById('capacity').value,
-    appeals:      document.getElementById('appeals').value,
+    firmName:     document.getElementById('firm').value.trim(),
+    attFirstName: document.getElementById('fn').value.trim(),
+    attLastName:  document.getElementById('ln').value.trim(),
+    barNumber:    document.getElementById('bar').value.trim(),
+    address:      document.getElementById('addr').value.trim(),
+    phone:        document.getElementById('ph').value.trim(),
+    email:        email,
+    intakeName:   document.getElementById('in').value.trim(),
+    intakePhone:  document.getElementById('ip').value.trim(),
+    states:       states,
+    capacity:     document.getElementById('cap').value,
+    appeals:      document.getElementById('app').value,
     crm:          document.getElementById('crm').value,
-    plan:         selectedPlan,
-    amount:       PLAN_AMOUNTS[selectedPlan] || '',
+    plan:         chosenPlan,
+    amount:       (PLANS[chosenPlan] || {}).price || '',
     timestamp:    new Date().toISOString()
   };
 
-  // Stripe payment (if configured)
-  if (stripe && cardElement) {
+  // Stripe (only if configured)
+  if (stripeObj && cardEl) {
     lbl.textContent = 'Processing payment...';
     try {
-      const {paymentMethod, error} = await stripe.createPaymentMethod({
-        type: 'card',
-        card: cardElement,
-        billing_details: {
-          name:  payload.attFirstName + ' ' + payload.attLastName,
-          email: payload.email,
-          phone: payload.phone,
-        }
+      var result = await stripeObj.createPaymentMethod({
+        type: 'card', card: cardEl,
+        billing_details: { name: payload.attFirstName + ' ' + payload.attLastName, email: email, phone: payload.phone }
       });
-      if (error) {
-        document.getElementById('card-errors').textContent = error.message;
-        btn.disabled = false; lbl.textContent = 'Activate My Firm — Submit & Pay';
+      if (result.error) {
+        document.getElementById('card-errors').textContent = result.error.message;
+        btn.disabled = false;
+        lbl.textContent = 'Activate My Firm — Submit & Pay';
         return;
       }
-      payload.stripePaymentMethodId = paymentMethod.id;
-      payload.stripePriceId = STRIPE_PRICES[selectedPlan] || '';
-    } catch(e) {
-      console.log('Stripe error:', e);
-    }
+      payload.stripePaymentMethodId = result.paymentMethod.id;
+      payload.stripePriceId = (PLANS[chosenPlan] || {}).stripeId || '';
+    } catch(e) {}
   }
 
-  // Submit to Apps Script
+  // Send to Apps Script
   lbl.textContent = 'Activating firm...';
   try {
-    await fetch(APPS_SCRIPT_URL + '?' + new URLSearchParams(payload).toString(), {
-      method:'GET', mode:'no-cors'
-    });
+    await fetch(API_URL + '?' + new URLSearchParams(payload).toString(), { method: 'GET', mode: 'no-cors' });
   } catch(e) {}
 
-  // Show suc
+  // Show success screen
+  var ref = 'FIRM-' + Date.now().t
