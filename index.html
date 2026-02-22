@@ -817,43 +817,44 @@ footer a { color:var(--blue); text-decoration:none; }
         <div class="form-part-title"><span>3</span>Legal Compliance Agreement</div>
         <div class="check-list" id="checkList">
 
-          <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox" id="chk1">
-            <div class="check-box"></div>
+          <div class="check-item" id="ci1" onclick="toggleCheck('chk1','ci1')">
+            <div class="check-box" id="cb1"></div>
             <div class="check-item-text">
               <strong>Marketing Services Acknowledgment</strong>
               I understand that StayVCS LLC is a legal marketing and intake qualification service, not a referral service. No fee paid to StayVCS LLC constitutes a referral fee or is connected to any legal fee earned.
             </div>
-          </label>
+          </div>
 
-          <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox" id="chk2">
-            <div class="check-box"></div>
+          <div class="check-item" id="ci2" onclick="toggleCheck('chk2','ci2')">
+            <div class="check-box" id="cb2"></div>
             <div class="check-item-text">
               <strong>ABA Rule 1.5(e) Compliance</strong>
               I agree to pay a flat subscription fee for dashboard access only. I acknowledge that this fee is not based on case outcomes, not calculated as a percentage of legal fees, and does not constitute fee-splitting under applicable bar rules.
             </div>
-          </label>
+          </div>
 
-          <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox" id="chk3">
-            <div class="check-box"></div>
+          <div class="check-item" id="ci3" onclick="toggleCheck('chk3','ci3')">
+            <div class="check-box" id="cb3"></div>
             <div class="check-item-text">
               <strong>Independent Review Responsibility</strong>
               I acknowledge that I am solely responsible for my own independent review of all case data provided. StayVCS LLC provides marketing data only. All intake and representation decisions are made exclusively by my firm.
             </div>
-          </label>
+          </div>
 
-          <label class="check-item" onclick="toggleCheck(this)">
-            <input type="checkbox" id="chk4">
-            <div class="check-box"></div>
+          <div class="check-item" id="ci4" onclick="toggleCheck('chk4','ci4')">
+            <div class="check-box" id="cb4"></div>
             <div class="check-item-text">
               <strong>Master Service Agreement</strong>
               I have read and agree to the StayVCS LLC Master Service Agreement above, including the exclusivity clause, no fee-splitting provision, and data ownership terms.
             </div>
-          </label>
+          </div>
 
         </div>
+        <!-- Hidden real checkboxes for form validation -->
+        <input type="checkbox" id="chk1" style="display:none">
+        <input type="checkbox" id="chk2" style="display:none">
+        <input type="checkbox" id="chk3" style="display:none">
+        <input type="checkbox" id="chk4" style="display:none">
         <div id="chk-err" style="font-size:11px;color:var(--red);font-family:var(--mono);margin-top:10px;display:none">All compliance checkboxes must be checked to continue.</div>
       </div>
 
@@ -914,13 +915,13 @@ footer a { color:var(--blue); text-decoration:none; }
         1. Check your email — dashboard access link sent to <span id="successEmail">your email</span><br>
         2. Your intake contact will receive Grade-A lead alerts by email + SMS<br>
         3. Bookmark your dashboard URL once you receive it<br>
-        4. Questions? Email <a href="mailto:vence31@gmail.com" style="color:var(--blue)">vence31@gmail.com</a>
+        4. Questions? Email <a href="/cdn-cgi/l/email-protection#f78192999492c4c6b7909a969e9bd994989a" style="color:var(--blue)"><span class="__cf_email__" data-cfemail="88feede6ebedbbb9c8efe5e9e1e4a6ebe7e5">[email&#160;protected]</span></a>
       </div>
       <div class="success-next">
         <a href="https://vence31.github.io/Disability-Leads/" class="success-btn primary" target="_blank">
           View Intake Platform →
         </a>
-        <a href="mailto:vence31@gmail.com?subject=Dashboard Access Request" class="success-btn secondary">
+        <a href="/cdn-cgi/l/email-protection#96e0f3f8f5f3a5a7d6f1fbf7fffab8f5f9fba9e5e3f4fcf3f5e2abd2f7e5fef4f9f7e4f2b6d7f5f5f3e5e5b6c4f3e7e3f3e5e2" class="success-btn secondary">
           Request Dashboard Access
         </a>
       </div>
@@ -955,7 +956,7 @@ footer a { color:var(--blue); text-decoration:none; }
 </footer>
 
 <!-- SCRIPTS -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://js.stripe.com/v3/"></script>
 <script>
 // ── CONFIG — REPLACE THESE ────────────────────────────────────────────────────
 const STRIPE_PUBLISHABLE_KEY = 'pk_live_YOUR_STRIPE_KEY_HERE'; // Get from dashboard.stripe.com
@@ -983,7 +984,8 @@ const STATES = [
   'New Hampshire','New Jersey','New Mexico','New York','North Carolina',
   'North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island',
   'South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont',
-  'Virginia','Washington','Washington DC','West Virginia','Wisconsin','Wyoming'
+  'Virginia','Washington','Washington DC','West Virginia','Wisconsin','Wyoming',
+  'Puerto Rico','Virgin Islands'
 ];
 
 // ── BUILD STATES GRID ─────────────────────────────────────────────────────────
@@ -1078,10 +1080,20 @@ try {
 } catch(e) {}
 
 // ── COMPLIANCE CHECKBOXES ─────────────────────────────────────────────────────
-function toggleCheck(label) {
-  const cb = label.querySelector('input[type="checkbox"]');
+function toggleCheck(chkId, ciId) {
+  const cb  = document.getElementById(chkId);
+  const ci  = document.getElementById(ciId);
+  const box = document.getElementById(chkId.replace('chk','cb'));
   cb.checked = !cb.checked;
-  label.classList.toggle('checked', cb.checked);
+  if (cb.checked) {
+    ci.classList.add('checked');
+    box.innerHTML = '✓';
+    box.style.cssText = 'border-color:var(--green);background:var(--green);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;';
+  } else {
+    ci.classList.remove('checked');
+    box.innerHTML = '';
+    box.style.cssText = '';
+  }
 }
 
 // ── VALIDATION ────────────────────────────────────────────────────────────────
@@ -1195,9 +1207,4 @@ async function submitForm() {
     });
   } catch(e) {}
 
-  // Show success
-  const refNum = 'FIRM-' + Date.now().toString(36).toUpperCase().slice(-6);
-  document.getElementById('refNum').textContent = refNum;
-  document.getElementById('successEmail').textContent = payload.email || 'your email';
-  document.getElementById('formBody').style.display = 'none';
-  document.getElementByI
+  // Show suc
