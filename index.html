@@ -1,132 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attorney Partner Onboarding | StayVCS Platform</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f8fafc;--bg2:#ffffff;--blue:#2563eb;--blue-d:#1d4ed8;
-  --cyan:#0891b2;--green:#16a34a;--gold:#b45309;--red:#dc2626;
-  --muted:#64748b;--text:#0f172a;--border:#e2e8f0;
-  --mono:'JetBrains Mono',monospace;--disp:'Syne',sans-serif;--body:'Manrope',sans-serif;
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:100px;}
+  <base target="_top">
+  <title>Attorney Plan Selection</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 40px;
+    }
 
-.nav{padding:30px 50px;display:flex;justify-content:space-between;align-items:center;}
-.logo{font-family:var(--disp);font-weight:900;font-size:24px;color:var(--text);letter-spacing:-1px;}
+    .container {
+      max-width: 700px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      margin: auto;
+    }
 
-.container{max-width:1100px;margin:0 auto;padding:0 20px;}
-.main-card{background:var(--bg2);border:1px solid var(--border);border-radius:24px;display:grid;grid-template-columns:320px 1fr;overflow:hidden;box-shadow:0 20px 25px -5px rgba(0,0,0,0.05);}
+    h2 {
+      margin-bottom: 20px;
+    }
 
-.sidebar{background:var(--bg);padding:50px 40px;border-right:1px solid var(--border);}
-.step-item{display:flex;align-items:center;gap:15px;margin-bottom:30px;opacity:0.4;transition:0.3s;}
-.step-item.active{opacity:1;}
-.step-circle{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;}
-.active .step-circle{background:var(--blue);border-color:var(--blue);color:white;}
-.step-label{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:1px;}
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
 
-.content{padding:60px;}
-h2{font-family:var(--disp);font-weight:900;font-size:32px;margin-bottom:15px;letter-spacing:-1.5px;}
-p.desc{color:var(--muted);font-size:16px;margin-bottom:40px;line-height:1.6;}
+    .section {
+      margin-bottom: 25px;
+    }
 
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-bottom:40px;}
-.field-group label{display:block;font-size:11px;font-weight:800;text-transform:uppercase;color:var(--muted);margin-bottom:8px;letter-spacing:0.5px;}
-input,select{width:100%;padding:14px 18px;background:var(--bg);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:var(--body);font-size:15px;transition:0.2s;}
-input:focus{outline:none;border-color:var(--blue);background:white;}
+    button {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.plan-toggle{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:40px;}
-.plan-card{background:var(--bg);border:2px solid var(--border);padding:20px;border-radius:16px;cursor:pointer;transition:0.2s;text-align:center;}
-.plan-card.active{border-color:var(--blue);background:rgba(37,99,235,0.03);}
-.plan-price{font-family:var(--disp);font-size:24px;font-weight:900;margin:10px 0;}
-
-.btn-p{background:var(--blue);color:white;border:none;padding:20px;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer;width:100%;transition:0.2s;box-shadow:0 4px 6px rgba(37,99,235,0.2);}
-.btn-p:hover{background:var(--blue-d);transform:translateY(-2px);}
-
-/* Success Screen Overrides */
-#sucScr{display:none;padding:60px;text-align:center;}
-#sucScr.show{display:block;}
-</style>
+    button:hover {
+      background: #162d66;
+    }
+  </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="logo">STAYVCS <span>PARTNER HUB</span></div>
-</nav>
-
 <div class="container">
-  <div class="main-card" id="onboardMain">
-    <div class="sidebar">
-      <div class="step-item active"><div class="step-circle">01</div><div class="step-label">Firm Info</div></div>
-      <div class="step-item"><div class="step-circle">02</div><div class="step-label">Plan Details</div></div>
-      <div class="step-item"><div class="step-circle">03</div><div class="step-label">Activation</div></div>
-    </div>
-    
-    <div class="content" id="formBody">
-      <h2>Law Firm Activation</h2>
-      <p class="desc">Complete the onboarding to unlock your state-priority lead dashboard.</p>
-      
-      <div class="grid">
-        <div class="field-group"><label>Firm Name</label><input type="text" id="firm"></div>
-        <div class="field-group"><label>Bar Number</label><input type="text" id="bar"></div>
-        <div class="field-group"><label>Attorney First Name</label><input type="text" id="fn"></div>
-        <div class="field-group"><label>Attorney Last Name</label><input type="text" id="ln"></div>
-      </div>
 
-      <div class="plan-toggle">
-        <div class="plan-card active" onclick="selPlan(1, 297, this)">
-          <div style="font-size:11px; font-weight:800; color:var(--muted);">STATE</div>
-          <div class="plan-price">$297/mo</div>
-        </div>
-        <div class="plan-card" onclick="selPlan(2, 497, this)">
-          <div style="font-size:11px; font-weight:800; color:var(--muted);">REGION</div>
-          <div class="plan-price">$497/mo</div>
-        </div>
-        <div class="plan-card" onclick="selPlan(3, 797, this)">
-          <div style="font-size:11px; font-weight:800; color:var(--muted);">NATIONAL</div>
-          <div class="plan-price">$797/mo</div>
-        </div>
-      </div>
+  <h2>Select Your Coverage Plan</h2>
 
-      <button class="btn-p" id="subBtn" onclick="doSubmit()">ACTIVATE FIRM ACCESS</button>
-    </div>
-
-    <div id="sucScr">
-      <div style="font-size:60px; margin-bottom:20px;">🎖️</div>
-      <h2 style="font-size:40px;">Firm Activated</h2>
-      <p style="color:var(--muted); margin-bottom:30px;">Your credentials have been generated and sent to your email.</p>
-      <div style="background:var(--bg); border:1px solid var(--border); padding:20px; border-radius:12px; margin-bottom:30px; font-family:var(--mono); font-size:14px;">
-        Ref ID: <span id="sucRef"></span>
-      </div>
-      <a href="Dashboard.html" class="btn-p" style="display:inline-block; text-decoration:none;">Go To Lead Dashboard</a>
-    </div>
+  <div class="section">
+    <label>Plan Type</label>
+    <select id="planSelect">
+      <option value="">-- Select Plan --</option>
+      <option value="state">Single State Plan</option>
+      <option value="region">Regional Plan</option>
+      <option value="nation">Nationwide Plan</option>
+    </select>
   </div>
+
+  <div class="section" id="stateSection" style="display:none;">
+    <label>Select State</label>
+    <select id="stateSelect">
+      <option value="">-- Select State --</option>
+      <option value="Texas">Texas</option>
+      <option value="California">California</option>
+      <option value="Florida">Florida</option>
+      <option value="Tennessee">Tennessee</option>
+      <option value="New York">New York</option>
+    </select>
+  </div>
+
+  <div class="section" id="regionSection" style="display:none;">
+    <label>Select Region</label>
+    <select id="regionSelect">
+      <option value="">-- Select Region --</option>
+      <option value="South">South</option>
+      <option value="West">West</option>
+      <option value="Midwest">Midwest</option>
+      <option value="Northeast">Northeast</option>
+    </select>
+  </div>
+
+  <button onclick="goToDashboard()">View Intake Platform</button>
+
 </div>
 
 <script>
-let chosenPlan = "State Level Access", planPrice = 297;
-function selPlan(id, price, el) {
-  planPrice = price;
-  document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-}
+  const planSelect = document.getElementById("planSelect");
+  const stateSection = document.getElementById("stateSection");
+  const regionSection = document.getElementById("regionSection");
 
-async function doSubmit() {
-  const btn = document.getElementById("subBtn");
-  btn.disabled = true;
-  btn.textContent = "ACTIVATING...";
-  
-  // LOGIC FROM YOUR ORIGINAL FILE REMAINS HERE
-  // ...
-  
-  setTimeout(() => {
-    document.getElementById("formBody").style.display = 'none';
-    document.getElementById("sucScr").classList.add('show');
-    document.getElementById("sucRef").textContent = "FIRM-" + Math.random().toString(36).substr(2, 6).toUpperCase();
-  }, 1500);
-}
+  planSelect.addEventListener("change", function() {
+    stateSection.style.display = "none";
+    regionSection.style.display = "none";
+
+    if (this.value === "state") {
+      stateSection.style.display = "block";
+    }
+
+    if (this.value === "region") {
+      regionSection.style.display = "block";
+    }
+  });
+
+  function goToDashboard() {
+    const plan = document.getElementById("planSelect").value;
+    const state = document.getElementById("stateSelect").value;
+    const region = document.getElementById("regionSelect").value;
+
+    if (!plan) {
+      alert("Please select a plan.");
+      return;
+    }
+
+    if (plan === "state" && !state) {
+      alert("Please select a state.");
+      return;
+    }
+
+    if (plan === "region" && !region) {
+      alert("Please select a region.");
+      return;
+    }
+
+    const selection = {
+      plan: plan,
+      state: state,
+      region: region
+    };
+
+    localStorage.setItem("attorneySelection", JSON.stringify(selection));
+
+    window.location.href = "AttorneyDashboard.html";
+  }
 </script>
+
 </body>
 </html>
